@@ -1,0 +1,33 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .form{
+       & label{
+        margin-right: 1rem;
+    }
+    & input[type="email"]{
+        margin-left: 2.5rem;
+    }
+    & input[type="password"]{
+        margin-left: .8rem;
+    }
+  
+    }
+
+    & button{
+        font-size: 1rem;
+        border-radius: .5rem;
+        background-color: darkgray;
+        color: white;
+        height: 2rem;
+        margin-left: 8rem;
+        margin-top: 1rem;
+        transition: all .3s;
+        &:hover{
+            color: white;
+            background-color: red;
+        }   
+    }
+}

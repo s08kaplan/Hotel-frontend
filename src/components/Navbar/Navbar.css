@@ -1,0 +1,40 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & ul {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+
+    & a {
+      text-decoration: none;
+      
+      &:hover li{
+        text-decoration: underline;
+        text-underline-offset: 0.2rem;
+      }
+    }
+  }
+  & .avatar{
+    position: relative;
+
+   & .modal {
+    z-index: 99;
+    position: absolute;
+    top: 100%;
+    left: -40px;
+    height: 10rem;
+
+    & ul{
+        display: flex;
+        flex-direction: column;
+    }
+  }
+
+  }
+
+
+  
+}

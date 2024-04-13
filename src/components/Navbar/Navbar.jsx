@@ -11,8 +11,8 @@ const Navbar = () => {
   const  modalRef  = useRef(null)
   const { user } = useSelector(state => state.auth)
   const { logout } = useAuthCalls()
-  const { username } = user.payload.user
-console.log(username);
+  const username = user?.username
+
 
   const handleModal = (e) => {
     console.log(e.target);
@@ -24,7 +24,7 @@ console.log(username);
   
   console.log(modalRef);
   console.log(modal);
-  const gender = "male"
+  const gender = ""
   return (
     <nav className="flex justify-between bg-slate-400 ">
        <div><img src={logo} alt="logo" width="200rem"/> </div> 

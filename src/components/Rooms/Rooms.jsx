@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import useRooms from "../custom-hooks/useRooms"
+import useRooms from "../../custom-hooks/useRooms"
 import { useSelector } from "react-redux"
+import "./Room.css"
 
 
 
@@ -18,11 +19,11 @@ const Rooms = () => {
     
   return (
     <main>
-       <section>
+       <section className="rooms">
         { data?.map(item => (
-          <div key={item._id}>
+          <div className="main-room"  key={item._id}>
               <span> {item.roomNumber} </span>
-         <span>{item.bedType}</span> 
+         <span className="bed-type">{item.bedType}</span> 
          { item.image.map(address => (
           <img key={address} src={address} alt="image" width="250px" />
          ))}

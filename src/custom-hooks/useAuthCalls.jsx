@@ -35,7 +35,7 @@ const useAuthCalls = () => {
     const logout = async () => {
         dispatch(fetchStart())
         try {
-             await axiosPublic.get("auth/logout")
+             await axiosWithToken.get("auth/logout")
             dispatch(logoutSuccess())
             navigate("/")
         } catch (error) {

@@ -5,6 +5,7 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Rooms from "../components/Rooms/Rooms";
+import AboutDetails from "../pages/About-Details/AboutDetails";
 
 const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter = () => {
       <Route path="/" element={<Home />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="about" element={<About />} />
+      <Route path="about-details/:id" element={<AboutDetails />} />
       <Route path="contact" element={<Contact />} />
       <Route path="rooms" element={<Rooms />} />
       <Route path="login" element={<Login />} />

@@ -6,6 +6,6 @@ export const memberImages = [
     {id:5, imageAddress: "https://ca.slack-edge.com/T05QKNCTHM4-U05SLK39M4Z-eb855b4ee7b3-512", info:"Precious member of PyScript Developers ", details: "Design master of the team"}, 
     {id:6, imageAddress: "https://ca.slack-edge.com/T05A6FRS4LS-U05BFE970TS-3597b1a4b94d-512", info:"Precious member of PyScript Developers ", details: "Design master and security department leader of the team"}, 
     {id:7, imageAddress: "https://ca.slack-edge.com/T05A6FRS4LS-U05D1D56XDL-cbf48eecafce-512", info:"Precious member of PyScript Developers ", details: "Smart  and the brain of the team with his simple and effective solutions"}, 
-    {id:8, imageAddress: "https://ca.slack-edge.com/T05A6FRS4LS-U05B4CAEKPT-911541421774-512", info:"Precious member of PyScript Developers ", details: "With the complex problem maker to make the team improve themselves by finding different solutions to his problems"}, 
+    {id:8, imageAddress: "https://ca.slack-edge.com/T05A6FRS4LS-U05B4CAEKPT-911541421774-512", info:"Precious member of PyScript Developers ", details: "The complex problem maker to make the team improve themselves by finding different solutions to his problems"}, 
     {id:9, imageAddress: "https://ca.slack-edge.com/T05QKNCTHM4-U05S7T372V9-f0172de3eebf-512", info:"Precious member of PyScript Developers ", details: "After chemistry she finds the best of her skills with the IT World to serve you what you deserve"}
 ]

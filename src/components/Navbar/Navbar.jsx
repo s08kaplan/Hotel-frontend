@@ -26,9 +26,9 @@ const Navbar = () => {
   console.log(modal);
   const gender = ""
   return (
-    <nav className="flex justify-between bg-slate-400 ">
+    <nav>
        <div><img src={logo} alt="logo" width="200rem"/> </div> 
-       <ul className="list-style-none no-underline">
+       <ul className="main-ul">
        <Link to="/"> <li className="no-underline">Home</li></Link>
        <Link to="/booking"><li>Booking</li></Link> 
        <Link to="/contact"><li>Contact</li></Link> 

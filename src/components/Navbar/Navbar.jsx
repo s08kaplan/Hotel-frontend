@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
 import logo from "../../assets/images/logo.png"
 import Avatar from 'react-avatar';
@@ -14,14 +14,26 @@ const Navbar = () => {
   const username = user?.username
 
 
-  const handleModal = (e) => {
-    console.log(e.target);
-    // if (!modalRef.current.contains(e.target)) {
-    if (modalRef.current !== "div.modal") {
-      setModal(false);
-    }
-  };
+
+
+  // useEffect(() => {
+
+  //   function handleModal(e)  {
+  //     // if (modalRef.current && modalRef.current !== e.target) {
+  //     if (modalRef.current && modalRef.current !== e.target) {
+  //       console.log(modalRef.current.contains(e.target));
+  //       setModal(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleModal)
   
+  //   return () => {
+  //     document.removeEventListener("click",handleModal)
+  //   }
+  // }, [])
+  
+  
+  console.log(modalRef.current);
   console.log(modalRef);
   console.log(modal);
   const gender = ""
@@ -37,7 +49,7 @@ const Navbar = () => {
        <div className="avatar" onClick={() => setModal(!modal)}>
         <Avatar size="50" round="50px" src={ gender == "male" ? `${import.meta.env.VITE_MALE_AVATAR}` : gender == "female" ? `${import.meta.env.VITE_FEMALE_AVATAR}` : `${import.meta.env.VITE_NO_GENDER_AVATAR}`}/>
 
-       {modal && <div className="modal" onClick={handleModal} ref={modalRef}>
+       {modal && <div className="modal"  ref={modalRef}>
             <ul>
            <Link to={!username && "/login"}>
               <li onClick={()=> (username && logout())}>{username ? "Logout" : "Login"}</li>

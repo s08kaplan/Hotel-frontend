@@ -1,10 +1,61 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import useAuthCalls from "../../custom-hooks/useAuthCalls";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema, registerSchema } from "../../Helpers/formValidation";
+import { formRegisterInputs, formLoginInputs } from "../../Helpers/formInputs";
+// import { DevTool } from "@hookform/devtools";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Button from "./Button"
+import Button from "./MyButton"
+
+const schemaMap = {
+  loginSchema,
+  registerSchema,
+};
+
 
 export default function LoginForm() {
+  const { registerUser, login } = useAuthCalls();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  
+  const resolvedSchema = schemaMap[schema];
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    setValue,
+    getValues,
+    reset,
+  } = useForm({ resolver: yupResolver(resolvedSchema) });
+
+
+  const onSubmit = (data) => {
+    console.log("submit data", data);
+    formType == "register"
+      ? dispatch(registerUser(data))
+      : dispatch(login(data));
+  };
+
+  useEffect(() => {
+    isSubmitSuccessful && reset();
+  }, [isSubmitSuccessful, reset]);
+
+  const handleNavigate = () => {
+    formType === "login" ? navigate("/register") : navigate("/login");
+  };
+
+  const handleLogin = () => {
+
+  }
+
   return (
     <Box
       component="form"
@@ -32,7 +83,7 @@ export default function LoginForm() {
           type="password"
           autoComplete="current-password"
         />
-      <Button/>
+      <Button onClick={handleLogin}/>
       </Stack>
     </Box>
   );

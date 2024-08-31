@@ -9,15 +9,15 @@ const Login = () => {
   const { error } = useSelector((state) => state.auth);
  
   return (
-      <section>
+      <Stack sx={{justifyContent:"center", alignItems: "center"}}>
         {error ? (
           <ErrorPage/>
         ) : (
-          <Stack>
-            <LoginForm/>
+          <Stack sx={{justifyContent:"center", alignItems: "center"}}>
+            <AuthForm formType={"login"} schema={"loginSchema"}/>
           </Stack>
         )}
-      </section>
+      </Stack>
     
   );
 };

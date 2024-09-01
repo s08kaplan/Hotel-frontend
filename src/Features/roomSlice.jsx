@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  rooms:{},
+  rooms:[],
   loading: false,
   error: false
 }
@@ -16,9 +16,7 @@ const roomSlice = createSlice({
     },
 
    getRooms: (state, { payload }) => {
-        state.rooms = {
-            ...state.rooms, payload
-        }
+        state.rooms = payload?.data
         state.loading = false
         state.error = false
     },

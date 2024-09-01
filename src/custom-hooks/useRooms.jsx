@@ -11,6 +11,7 @@ const getRoomsInfo = async () => {
     dispatch(fetchStart())
     try {
        const { data } = await axiosPublic("rooms") 
+       console.log("get Rooms : ", data);
        dispatch(getRooms(data))
     } catch (error) {
         dispatch(fetchFail())

@@ -1,47 +1,50 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import useBooking from '../../custom-hooks/useBooking'
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import useBooking from "../../custom-hooks/useBooking";
+import { Box, Stack, TextField, Typography } from "@mui/material";
+import Calendar from "../../components/FORM-INPUTS/Calendar";
+import SelectOption from "../../components/FORM-INPUTS/SelectOption";
+import useRooms from "../../custom-hooks/useRooms";
 
 const Booking = () => {
-  const { user } = useSelector(state => state.auth)
-  const { booking } = useSelector(state => state.booking)
-  const { reservation } = useBooking()
- 
-  const data = booking?.payload?.data
- 
-const [ inputs, setInputs ] = useState({
-  "arrival_date" : "",
-  "departure_date" : "",
-  "guest_number":""
-})
+  const { user } = useSelector((state) => state.auth);
+  const { booking } = useSelector((state) => state.booking);
+  const { rooms } = useSelector((state) => state.room);
+  const { reservation } = useBooking();
 
-const handleChange =(e) => {
- const { name, value } = e.target
- 
-const newValue = name === "guest_number" ? Number(value) : value
- setInputs({...inputs, [name] : newValue,username: user.username})
- 
-}
+  const { getRoomsInfo } = useRooms()
+
+  useEffect(() => {
+   getRoomsInfo()
+  }, [])
+  
+
+  const data = booking?.payload?.data;
+  console.log("booking: ", booking);
+  console.log("rooms: ", rooms);
+
+  const [inputs, setInputs] = useState({
+    arrival_date: "",
+    departure_date: "",
+    guest_number: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    const newValue = name === "guest_number" ? Number(value) : value;
+    setInputs({ ...inputs, [name]: newValue, username: user.username });
+  };
 
   const handleSubmit = (e) => {
-    reservation(inputs)
-  }
+    reservation(inputs);
+  };
   return (
-    <main >
-      <section>
-        <h2>Let's find a Reservation for you </h2>
-        <div >
-          <label htmlFor="arrivalDate">Check in Date:</label>
-          <input type="date" name="arrival_date" id="arrivalDate" onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="departureDate">Check out Date:</label>
-          <input type="date" name="departure_date" id="departureDate" onChange={handleChange} />
-        </div>
-        <div >
-          <label htmlFor="room">Room</label>
-          <select name="guest_number" id="rooms" onChange={handleChange} >
-            Rooms for number of Person 
+    <Box sx={{marginTop:"1rem"}}>
+      <Stack sx={{justifyContent: "center", alignItems: "center", gap:"1rem"}}>
+        <Typography variant="h4">Let's find a Reservation for you </Typography>
+        {/* <select name="guest_number" id="rooms" onChange={handleChange}>
+            Rooms for number of Person
             <option value="1">A1</option>
             <option value="1">A2</option>
             <option value="2">A3</option>
@@ -49,20 +52,31 @@ const newValue = name === "guest_number" ? Number(value) : value
             <option value="4">A5</option>
             <option value="4">A6</option>
             <option value="6">A7</option>
-            </select>
-        </div>
+          </select> */}
+
+        <Calendar />
+        <SelectOption rooms={rooms}/>
         <button onClick={handleSubmit}>Make a reservation</button>
         <button>New reservation</button>
-      </section>
-      { data && <div className="reservation-status">
-        <p>Dear {user.username}, for your request there has been made a reservation for the dates between 
-        <span>{new Date(data["arrival_date"]).toLocaleDateString("en-US")}</span>
-        <span>{new Date(data["departure_date"]).toLocaleDateString("en-US")}</span>
-        for <span>{data.night}</span> night with the total amount of <span>{data.totalPrice}</span>
-        </p>
-      </div> }
-    </main>
-  )
-}
+      </Stack>
+      {data && (
+        <Box>
+          <Stack>
+            Dear {user.username}, for your request there has been made a
+            reservation for the dates between
+            <Typography>
+              {new Date(data["arrival_date"]).toLocaleDateString("en-US")}
+            </Typography>
+            <Typography>
+              {new Date(data["departure_date"]).toLocaleDateString("en-US")}
+            </Typography>
+            for <Typography>{data.night}</Typography> night with the total
+            amount of <Typography>{data.totalPrice}</Typography>
+          </Stack>
+        </Box>
+      )}
+    </Box>
+  );
+};
 
-export default Booking
+export default Booking;

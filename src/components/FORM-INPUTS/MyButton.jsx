@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 
 export default function MyButton({children, ...props}) {
   return (
-    <Stack spacing={2} direction="row">
+    <Stack spacing={2} direction="row" alignItems="center">
       <Button variant="contained" {...props}>{children}</Button>
     </Stack>
   );

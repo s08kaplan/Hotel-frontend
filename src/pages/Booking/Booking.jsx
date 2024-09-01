@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import "./Booking.css"
 import useBooking from '../../custom-hooks/useBooking'
 
 const Booking = () => {
@@ -28,18 +27,18 @@ const newValue = name === "guest_number" ? Number(value) : value
     reservation(inputs)
   }
   return (
-    <main className='booking-main'>
-      <section className='booking'>
+    <main >
+      <section>
         <h2>Let's find a Reservation for you </h2>
-        <div className="main-reservation">
+        <div >
           <label htmlFor="arrivalDate">Check in Date:</label>
           <input type="date" name="arrival_date" id="arrivalDate" onChange={handleChange} />
         </div>
-        <div className="main-reservation">
+        <div>
           <label htmlFor="departureDate">Check out Date:</label>
           <input type="date" name="departure_date" id="departureDate" onChange={handleChange} />
         </div>
-        <div className="room">
+        <div >
           <label htmlFor="room">Room</label>
           <select name="guest_number" id="rooms" onChange={handleChange} >
             Rooms for number of Person 

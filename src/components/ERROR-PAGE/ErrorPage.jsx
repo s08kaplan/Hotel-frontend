@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -114,14 +115,14 @@ const ErrorPage = ({ msg, blogError }) => {
       // console.log("blogError from blogError : ",blogError);
     
   return (
-    <section>
-        <div>
-             <h3>{message}</h3> 
-             <h5> 
+    <Box>
+        <Stack>
+             <Typography variant='h3'>{message}</Typography> 
+             <Typography variant='h5'> 
               You will be navigated to {path} page automatically in 3 seconds
-            </h5>
-        </div>
-    </section>
+            </Typography>
+        </Stack>
+    </Box>
   )
 }
 

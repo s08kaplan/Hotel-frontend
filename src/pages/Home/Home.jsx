@@ -1,13 +1,11 @@
-import "./Home.css"
+import { Box, Typography } from "@mui/material";
 
 const Home = () => {
-
   return (
-    <main>
-<h1>Welcome to PyScript Hotels Group</h1>
+    <Box>
+      <Typography variant="h1">Welcome to PyScript Hotels Group</Typography>
+    </Box>
+  );
+};
 
-    </main>
-  )
-}
-
-export default Home
+export default Home;

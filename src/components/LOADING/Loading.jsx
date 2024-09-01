@@ -1,18 +1,21 @@
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import React from 'react'
 
 
 const Loading = () => {
   return (
-    <section className="main">
-        <main className="container">
-            <section className="content">
-                <h3>Loading</h3>
-                <span>.</span>
-                <span>.</span>
-                <span>.</span>
-            </section>
-        </main>
-    </section>
+    <Box>
+        <Stack >
+            <Stack>
+                <Typography variant="h3">Loading</Typography>
+                <Box>.</Box>
+                <Box>.</Box>
+                <Box>.</Box>
+            </Stack>
+        </Stack>
+    </Box>
   )
 }
 

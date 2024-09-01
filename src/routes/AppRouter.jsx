@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/HOME/Home";
 import Loading from "../components/LOADING/Loading";
+import Unauthorized from "../pages/UNAUTHORIZED/Unauthorized";
 
 const Login = lazy(() => import("../pages/LOGIN/Login"));
 const Register = lazy(() => import("../pages/REGISTER/Register"));
@@ -11,6 +12,7 @@ const About = lazy(() => import("../pages/ABOUT/About"));
 const AboutDetails = lazy(() => import("../pages/ABOUT-DETAILS/AboutDetails"));
 const Contact = lazy(() => import("../pages/CONTACT/Contact"));
 const Rooms = lazy(() => import("../pages/ROOMS/Rooms"));
+const Upload = lazy(() => import("../pages/UPLOAD/Upload"));
 const NotFound = lazy(() => import("../pages/404/NotFound"));
 
 const AppRouter = () => {
@@ -18,8 +20,14 @@ const AppRouter = () => {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="booking" element={<PrivateRouter />}>
+        <Route
+          path="booking"
+          element={<PrivateRouter allowedRoles={[ "admin", "staff", "user"]} />}
+        >
           <Route path="" element={<Booking />} />
+        </Route>
+        <Route element={<PrivateRouter allowedRoles={["admin", "staff"]} />}>
+          <Route path="upload" element={<Upload />} />
         </Route>
         <Route path="about" element={<About />} />
         <Route path="about-details/:id" element={<AboutDetails />} />
@@ -27,6 +35,7 @@ const AppRouter = () => {
         <Route path="rooms" element={<Rooms />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

@@ -12,6 +12,7 @@ const About = lazy(() => import("../pages/ABOUT/About"));
 const AboutDetails = lazy(() => import("../pages/ABOUT-DETAILS/AboutDetails"));
 const Contact = lazy(() => import("../pages/CONTACT/Contact"));
 const Rooms = lazy(() => import("../pages/ROOMS/Rooms"));
+const RoomDetail = lazy(() => import("../pages/ROOM-DETAIL/RoomDetail"));
 const Upload = lazy(() => import("../pages/UPLOAD/Upload"));
 const NotFound = lazy(() => import("../pages/404/NotFound"));
 
@@ -33,6 +34,7 @@ const AppRouter = () => {
         <Route path="about-details/:id" element={<AboutDetails />} />
         <Route path="contact" element={<Contact />} />
         <Route path="rooms" element={<Rooms />} />
+        <Route path="room-detail/:roomId" element={<RoomDetail />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useBooking from "../../custom-hooks/useBooking";
-import { Box, Stack, TextField, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Calendar from "../../components/FORM-INPUTS/Calendar";
+import MyButton from "../../components/FORM-INPUTS/MyButton"
 import SelectOption from "../../components/FORM-INPUTS/SelectOption";
 import useRooms from "../../custom-hooks/useRooms";
 
@@ -13,6 +14,8 @@ const Booking = () => {
   const { reservation } = useBooking();
 
   const { getRoomsInfo } = useRooms()
+  const calendarRef = useRef()
+  const guestRef = useRef()
 
   useEffect(() => {
    getRoomsInfo()
@@ -22,47 +25,69 @@ const Booking = () => {
   const data = booking?.payload?.data;
   console.log("booking: ", booking);
   console.log("rooms: ", rooms);
+  console.log("user in booking: ", user);
+ 
 
-  const [inputs, setInputs] = useState({
-    arrival_date: "",
-    departure_date: "",
-    guest_number: "",
-  });
+  // const [selectedDateRange, setSelectedDateRange] = useState({
+  //   arrival_date: "",
+  //   departure_date: "",
+  //   guest_number: "",
+  // });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleDateChange = (range) => {
+  //   setSelectedDateRange({
+  //     arrival_date: range.startDate,
+  //     departure_date: range.endDate
+  //   });
+  // };
 
-    const newValue = name === "guest_number" ? Number(value) : value;
-    setInputs({ ...inputs, [name]: newValue, username: user.username });
-  };
-
-  const handleSubmit = (e) => {
-    reservation(inputs);
+  const handleSubmit = () => {
+    const selectedDateRange = calendarRef.current.getSelectedDateRange();
+    console.log('Selected Date Range:', selectedDateRange);
+    const bedType = guestRef.current.getBedType()
+    console.log('bedType:', bedType)
+    let guest_number;
+    switch (bedType) {
+      case "single":
+        guest_number=1
+        break;
+      case "double":
+        guest_number=2
+        break;
+      case "family":
+        guest_number= 4
+        break;
+      case "king":
+        guest_number= 6 
+        break;
+    
+      default:
+        guest_number=1
+        break;
+    }
+    const postData = {
+      arrival_date:selectedDateRange.arrival_date,
+      departure_date:selectedDateRange.departure_date,
+      username: user?.username,
+      guest_number
+    }
+    console.log("postData: ",postData);
+    reservation(postData);
   };
   return (
     <Box sx={{marginTop:"1rem"}}>
       <Stack sx={{justifyContent: "center", alignItems: "center", gap:"1rem"}}>
         <Typography variant="h4">Let's find a Reservation for you </Typography>
-        {/* <select name="guest_number" id="rooms" onChange={handleChange}>
-            Rooms for number of Person
-            <option value="1">A1</option>
-            <option value="1">A2</option>
-            <option value="2">A3</option>
-            <option value="2">A4</option>
-            <option value="4">A5</option>
-            <option value="4">A6</option>
-            <option value="6">A7</option>
-          </select> */}
-
-        <Calendar />
-        <SelectOption rooms={rooms}/>
-        <button onClick={handleSubmit}>Make a reservation</button>
-        <button>New reservation</button>
+        {/* <Calendar onDateChange={handleDateChange} /> */}
+        <Calendar ref={calendarRef}/>
+        <SelectOption label="Rooms" rooms={rooms} ref={guestRef}/>
+        <MyButton onClick={handleSubmit}>Make a reservation</MyButton>
+        <MyButton>New reservation</MyButton>
       </Stack>
       {data && (
         <Box>
           <Stack>
-            Dear {user.username}, for your request there has been made a
+            Dear {user?.username}, for your request there has been made a
             reservation for the dates between
             <Typography>
               {new Date(data["arrival_date"]).toLocaleDateString("en-US")}

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -6,14 +6,17 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Box, Typography } from "@mui/material";
 
-export default function SelectOption({ id, label, value, rooms = [] }) {
-  const [age, setAge] = React.useState("");
+const SelectOption = forwardRef(({ id, label, value, rooms = [] }, ref) => {
+  const [choice, setChoice] = React.useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setChoice(event.target.value);
   };
 
+useImperativeHandle (ref, ()=>({getBedType: ()=> choice})
+)
   console.log("rooms in select option", rooms);
+  console.log("room in select option", choice);
   return (
     <Box
       sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}
@@ -27,8 +30,8 @@ export default function SelectOption({ id, label, value, rooms = [] }) {
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
-              value={age}
-              label="Age"
+              value={choice}
+              label={label}
               onChange={handleChange}
             >
               {rooms?.map((room) => (
@@ -82,12 +85,12 @@ export default function SelectOption({ id, label, value, rooms = [] }) {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
-              value={age}
-              label="Age"
+              value={choice}
+              label={label}
               onChange={handleChange}
             >
               <MenuItem value="">
@@ -103,4 +106,6 @@ export default function SelectOption({ id, label, value, rooms = [] }) {
       </FormControl>
     </Box>
   );
-}
+})
+
+export default SelectOption

@@ -60,6 +60,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const navigation = [
+  { name: "Home", to: "/" },
+  { name: "Rooms", to: "/rooms" },
+  { name: "About", to: "/about" },
+  { name: "Contact", to: "/contact" },
+  { name: "Booking", to: "/booking" },
+  // { name: "Login", to: "/login" },
+  // { name: "Register", to: "/register" },
+];
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -73,21 +83,13 @@ export default function Navbar() {
         <img src={logo} alt="logo" width="150px" style={{ padding: "10px" }} />
       </Typography>
       <List>
-        <ListItemButton component={Link} to="/">
-          <ListItemText primary="Home" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/rooms">
-          <ListItemText primary="Rooms" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/about">
-          <ListItemText primary="About" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/contact">
-          <ListItemText primary="Contact" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/booking">
-          <ListItemText primary="Booking" />
-        </ListItemButton>
+        {
+          navigation.map(item => (
+            <ListItemButton component={Link} to={item.to}>
+            <ListItemText primary={item.name} />
+          </ListItemButton>
+          ))
+        }
       </List>
     </Box>
   );
@@ -101,7 +103,7 @@ export default function Navbar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { sm: "flex" }}}
           >
             <MenuIcon />
           </IconButton>
@@ -220,7 +222,7 @@ export default function Navbar() {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", sm: "block" },
             "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
           }}
         >

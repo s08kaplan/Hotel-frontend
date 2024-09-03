@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -20,6 +21,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/images/logo.png";
 import { ListItemButton, Stack } from "@mui/material";
+import useAuthCalls from "../../custom-hooks/useAuthCalls";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,15 +68,24 @@ const navigation = [
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
   { name: "Booking", to: "/booking" },
-  // { name: "Login", to: "/login" },
-  // { name: "Register", to: "/register" },
+  { name: "Login", to: "/login" },
+  { name: "Register", to: "/register" },
 ];
 
 export default function Navbar() {
+  const { user, token } = useSelector((state) => state.auth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { logout } = useAuthCalls();
+
+  console.log(user);
+  console.log(token);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleLogout = () => {
+    logout()
   };
 
   const drawer = (
@@ -83,16 +94,27 @@ export default function Navbar() {
         <img src={logo} alt="logo" width="150px" style={{ padding: "10px" }} />
       </Typography>
       <List>
-        {
-          navigation.map(item => (
+        {navigation.map((item) =>
+          token && item.name == "Login" ? (
+            <ListItemButton onClick={handleLogout}>
+              <ListItemText primary="Log out" />
+            </ListItemButton>
+          ) : token && item.name == "Register" ? (
+            //  <ListItemButton component={Link} to="">
+            //    <ListItemText primary="Log out" />
+            //  </ListItemButton>
+            ""
+          ) : (
             <ListItemButton component={Link} to={item.to}>
-            <ListItemText primary={item.name} />
-          </ListItemButton>
-          ))
-        }
+              <ListItemText primary={item.name} />
+            </ListItemButton>
+          )
+        )}
       </List>
     </Box>
   );
+
+  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -103,7 +125,7 @@ export default function Navbar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "flex" }}}
+            sx={{ mr: 2, display: { sm: "flex" } }}
           >
             <MenuIcon />
           </IconButton>

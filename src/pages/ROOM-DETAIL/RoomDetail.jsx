@@ -6,18 +6,18 @@ import { Box, Stack, Typography } from "@mui/material";
 import RoomCard from "../../components/ROOM-CARD/RoomCard";
 
 const RoomDetail = () => {
-  const { getRoomsInfo } = useRooms();
-  const { roomDetail } = useSelector((state) => state.room);
-  const { roomId } = useParams();
+  // const { getRoomsInfo } = useRooms();
+  // const { roomDetail } = useSelector((state) => state.room);
+  // const { roomId } = useParams();
 
-  // console.log(roomId);
-  // console.log(roomDetail?.roomNumber);
+  // // console.log(roomId);
+  // // console.log(roomDetail?.roomNumber);
 
-  useEffect(() => {
-    getRoomsInfo("roomDetail", roomId);
-  }, []);
+  // useEffect(() => {
+  //   getRoomsInfo("roomDetail", roomId);
+  // }, []);
 
-  return <RoomCard detail={roomDetail}/>;
+  return <RoomCard />;
 };
 
 export default RoomDetail;

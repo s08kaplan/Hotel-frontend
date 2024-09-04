@@ -23,6 +23,7 @@ import logo from "../../assets/images/logo.png";
 import { ListItemButton, Stack } from "@mui/material";
 import useAuthCalls from "../../custom-hooks/useAuthCalls";
 
+// ! styled elements for search part
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -61,7 +62,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+// !--------------------------------------------
 
+// ! Navigation
 const navigation = [
   { name: "Home", to: "/" },
   { name: "Rooms", to: "/rooms" },
@@ -71,6 +74,9 @@ const navigation = [
   { name: "Login", to: "/login" },
   { name: "Register", to: "/register" },
 ];
+// !-------------------------------------------
+
+const navbarNavigation = navigation.filter((item, index) => index < 5 && item)
 
 export default function Navbar() {
   const { user, token } = useSelector((state) => state.auth);
@@ -85,36 +91,35 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    logout()
+    logout();
   };
 
+  console.log(navigation);
+
+  // ! Drawer - Sidebar
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         <img src={logo} alt="logo" width="150px" style={{ padding: "10px" }} />
       </Typography>
       <List>
-        {navigation.map((item) =>
-          token && item.name == "Login" ? (
+        {navigation.map((item) => (
+          <React.Fragment key={item.name}>
+           { token && item.name == "Login" ? (
             <ListItemButton onClick={handleLogout}>
               <ListItemText primary="Log out" />
             </ListItemButton>
-          ) : token && item.name == "Register" ? (
-            //  <ListItemButton component={Link} to="">
-            //    <ListItemText primary="Log out" />
-            //  </ListItemButton>
-            ""
-          ) : (
+            ) : token && item.name == "Register" ? ( "" ) : (
             <ListItemButton component={Link} to={item.to}>
               <ListItemText primary={item.name} />
             </ListItemButton>
-          )
-        )}
+            )}
+          </React.Fragment>
+        ))}
       </List>
     </Box>
   );
 
-  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -152,56 +157,21 @@ export default function Navbar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link
-              to="/"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                marginRight: "20px",
-              }}
-            >
-              Home
-            </Link>
-            <Link
-              to="/rooms"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                marginRight: "20px",
-              }}
-            >
-              Rooms
-            </Link>
-            <Link
-              to="/about"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                marginRight: "20px",
-              }}
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                marginRight: "20px",
-              }}
-            >
-              Contact
-            </Link>
-            <Link
-              to="/booking"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                marginRight: "20px",
-              }}
-            >
-              Booking
-            </Link>
+            {
+              navbarNavigation.map(item => (
+                <Link
+                to={item.to}
+                key={item.name}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  marginRight: "20px",
+                }}
+              >
+                {item.name}
+              </Link>
+              ))
+            }
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

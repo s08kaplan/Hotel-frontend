@@ -14,11 +14,13 @@ const Booking = () => {
   const { reservation } = useBooking();
 
   const { getRoomsInfo } = useRooms()
+  const { getReservationInfo } = useBooking()
   const calendarRef = useRef()
   const guestRef = useRef()
 
   useEffect(() => {
    getRoomsInfo()
+   getReservationInfo()
   }, [])
   
 
@@ -27,19 +29,6 @@ const Booking = () => {
   console.log("rooms: ", rooms);
   console.log("user in booking: ", user);
  
-
-  // const [selectedDateRange, setSelectedDateRange] = useState({
-  //   arrival_date: "",
-  //   departure_date: "",
-  //   guest_number: "",
-  // });
-
-  // const handleDateChange = (range) => {
-  //   setSelectedDateRange({
-  //     arrival_date: range.startDate,
-  //     departure_date: range.endDate
-  //   });
-  // };
 
   const handleSubmit = () => {
     const selectedDateRange = calendarRef.current.getSelectedDateRange();

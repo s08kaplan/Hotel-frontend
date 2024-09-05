@@ -2,11 +2,12 @@ import { Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-// import { clearError } from '../../Features/authSlice';
-// import { clearBlogError } from '../../Features/BlogSlice';
+import { clearError } from '../../Features/authSlice';
+import { clearBookingError } from '../../Features/bookingSlice';
 
-const ErrorPage = ({ msg, blogError }) => {
-    const { errorMessage, error } = useSelector((state) => state.auth);
+const ErrorPage = () => {
+    const { errorMessage, error: authError  } = useSelector((state) => state.auth);
+    const { bookingErrorMessage, error: bookingError } = useSelector((state) => state.booking);
     const [message, setMessage] = useState("");
 
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const ErrorPage = ({ msg, blogError }) => {
     useEffect(() => {
         let timer;
     
-        switch (error || blogError) {
+        switch (authError || bookingError) {
           case errorMessage?.includes("duplicate") &&
             errorMessage?.includes("username"):
             setMessage("Username has taken");
@@ -55,64 +56,64 @@ const ErrorPage = ({ msg, blogError }) => {
     
             return () => clearTimeout(timer);
 
-            case msg?.includes("There is no such a blog"):
-              setMessage("Sorry the Blog you are looking for is deleted by the owner");
+            case bookingErrorMessage?.includes("valid dates"):
+              setMessage("Please check your dates");
               timer = setTimeout(() => {
-                dispatch(clearBlogError());
+                dispatch(clearBookingError());
               }, 3000);
       
               return () => clearTimeout(timer);
              
       
-            case msg?.includes("The blog you are looking for has been removed or deleted"):
-              setMessage("The blog you are looking for has been deleted");
+            case bookingErrorMessage?.includes("not empty at the period of time"):
+              setMessage("The room you are looking for is reserved at the period of time you chose please change the date");
               timer = setTimeout(() => {
-                dispatch(clearBlogError());
+                dispatch(clearBookingError());
               }, 3000);
       
               return () => clearTimeout(timer);
   
-            case msg?.includes("E11000 duplicate key error collection: blogAPI.categories"):
-              setMessage("The category already exists");
-              timer = setTimeout(() => {
-                dispatch(clearBlogError());
-              }, 3000);
+            // case bookingErrorMessage?.includes("E11000 duplicate key error collection: blogAPI.categories"):
+            //   setMessage("The category already exists");
+            //   timer = setTimeout(() => {
+            //     dispatch(clearBookingError());
+            //   }, 3000);
       
-              return () => clearTimeout(timer);
+            //   return () => clearTimeout(timer);
   
-            case msg?.includes("Comment not found"):
-              setMessage("Sorry there is no such a comment");
-              timer = setTimeout(() => {
-                dispatch(clearBlogError());
-              }, 3000);
+            // case bookingErrorMessage?.includes("Comment not found"):
+            //   setMessage("Sorry there is no such a comment");
+            //   timer = setTimeout(() => {
+            //     dispatch(clearBookingError());
+            //   }, 3000);
       
-              return () => clearTimeout(timer);
+            //   return () => clearTimeout(timer);
   
-            case msg?.includes("Blog not found"):
-              setMessage("Blog not found");
-              timer = setTimeout(() => {
-                dispatch(clearBlogError());
-              }, 3000);
+            // case bookingErrorMessage?.includes("Blog not found"):
+            //   setMessage("Blog not found");
+            //   timer = setTimeout(() => {
+            //     dispatch(clearBookingError());
+            //   }, 3000);
       
-              return () => clearTimeout(timer);
+            //   return () => clearTimeout(timer);
       
       
           default:
             setMessage("Sorry there is an error occurred just wait for 3 seconds");
             timer = setTimeout(() => {
               dispatch(clearError());
-              dispatch(clearBlogError());
+              dispatch(clearBookingError());
             }, 3000);
     
             return () => clearTimeout(timer);
         }
-      }, [error, blogError]);
+      }, [error, bookingError]);
 
     
       // console.log("error from auth : ",error);
       // console.log("errorMessage from auth : ",errorMessage);
-      // console.log("msg from blogError : ",msg);
-      // console.log("blogError from blogError : ",blogError);
+      // console.log(" from bookingError : ",);
+      // console.log("bookingError from bookingError : ",bookingError);
     
   return (
     <Box>

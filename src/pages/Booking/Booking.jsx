@@ -64,9 +64,9 @@ const Booking = () => {
     reservation(postData);
   };
   return (
-    <Box sx={{marginTop:"1rem"}}>
-      <Stack sx={{justifyContent: "center", alignItems: "center", gap:"1rem"}}>
+    <Box sx={{marginTop:"1rem",display:"flex", flexDirection:"column",  justifyContent:"center", alignItems:"center"}}>
         <Typography variant="h4">Let's find a Reservation for you </Typography>
+      <Stack sx={{flexDirection:"row", justifyContent: "center", alignItems: "center", gap:"1rem"}}>
         {/* <Calendar onDateChange={handleDateChange} /> */}
         <Calendar ref={calendarRef}/>
         <SelectOption label="Rooms" rooms={rooms} ref={guestRef}/>

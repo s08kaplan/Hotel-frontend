@@ -1,8 +1,8 @@
-import { Suspense, lazy } from "react";
+import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import SuspenseWrapper from "../components/SUSPENSE-WRAPPER/SuspenseWrapper"
 import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/HOME/Home";
-import Loading from "../components/LOADING/Loading";
 import Unauthorized from "../pages/UNAUTHORIZED/Unauthorized";
 
 const Login = lazy(() => import("../pages/LOGIN/Login"));
@@ -18,7 +18,7 @@ const NotFound = lazy(() => import("../pages/404/NotFound"));
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={<Loading />}>
+    <SuspenseWrapper>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -40,7 +40,7 @@ const AppRouter = () => {
         <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Suspense>
+    </SuspenseWrapper>
   );
 };
 

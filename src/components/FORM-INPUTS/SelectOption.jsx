@@ -6,106 +6,199 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Box, Typography } from "@mui/material";
 
-const SelectOption = forwardRef(({ id, label, value, rooms = [] }, ref) => {
+const SelectOption = forwardRef(({ id, label, value, rooms = [], guests=[] }, ref) => {
   const [choice, setChoice] = React.useState("");
 
   const handleChange = (event) => {
     setChoice(event.target.value);
   };
 
-useImperativeHandle (ref, ()=>({getBedType: ()=> choice})
-)
+  useImperativeHandle(ref, () => ({ getBedType: () => choice }));
   console.log("rooms in select option", rooms);
-  console.log("room in select option", choice);
+  console.log("choice in select option", choice);
+  console.log("guests in select option", guests);
+  const items = rooms.length > 0 ? rooms : guests.length > 0 ? guests : [];
   return (
-    <Box
-      sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}
-    >
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        {rooms ? (
-          <React.Fragment>
-            <InputLabel id={"demo-simple-select-helper-label"}>
-              Rooms
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              value={choice}
-              label={label}
-              onChange={handleChange}
+    // <Box
+    //   sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}
+    // >
+    //   <FormControl sx={{ m: 1, minWidth: 120 }}>
+    //     {rooms ? (
+    //       <React.Fragment>
+    //         <InputLabel id={label}>Rooms</InputLabel>
+    //         <Select
+    //           labelId={label}
+    //           id={label}
+    //           value={choice}
+    //           label={label}
+    //           onChange={handleChange}
+    //         >
+    //           {rooms?.map((room) => (
+    //             <MenuItem
+    //               value={room._id}
+    //               sx={{
+    //                 display: "flex",
+    //                 justifyContent: "space-between",
+    //                 alignItems: "center",
+    //                 px: 2,
+    //                 position: "relative",
+    //                 "&:hover .hoverImage": {
+    //                   opacity: 1,
+    //                 },
+    //               }}
+    //             >
+    //               <Box>
+    //                 <Typography variant="body1">{room.roomNumber}</Typography>
+    //                 <Typography variant="body2" color="textSecondary">
+    //                   {room.bedType}
+    //                 </Typography>
+    //               </Box>
+    //               <Box
+    //                 className="hoverImage"
+    //                 sx={{
+    //                   position: "absolute",
+    //                   right: 0,
+    //                   top: "50%",
+    //                   transform: "translateY(-50%)",
+    //                   width: 50,
+    //                   height: 50,
+    //                   opacity: 0,
+    //                   transition: "opacity 0.3s ease",
+    //                   borderRadius: 4,
+    //                 }}
+    //               >
+    //                 <img
+    //                   src={room.image[0]}
+    //                   alt={room.roomNumber}
+    //                   style={{
+    //                     width: "100%",
+    //                     height: "100%",
+    //                     objectFit: "cover",
+    //                   }}
+    //                 />
+    //               </Box>
+    //             </MenuItem>
+    //           ))}
+    //         </Select>
+    //         <FormHelperText>Select Room</FormHelperText>{" "}
+    //       </React.Fragment>
+    //     ) :
+    //     guests ? (
+    //       <React.Fragment>
+    //         <InputLabel id={label}>{label}</InputLabel>
+    //         <Select
+    //           labelId={label}
+    //           id={label}
+    //           value={choice}
+    //           label={label}
+    //           onChange={handleChange}
+    //         >
+    //           {guests.map((guest=>  (
+    //             <MenuItem value={guest}
+    //             sx={{
+    //               display: "flex",
+    //               justifyContent: "space-between",
+    //               alignItems: "center",
+    //               px: 2,
+    //               width:"1rem"
+    //               // position: "relative",
+    //               // "&:hover .hoverImage": {
+    //               //   opacity: 1,
+    //               // },
+    //             }}
+    //             >
+    //              <Typography>{guest}</Typography>
+    //               </MenuItem>
+    //           )))}
+    //         </Select>
+    //         <FormHelperText>Select Guest Number</FormHelperText>{" "}
+    //       </React.Fragment>
+    //     )
+    //   :""
+    //   }
+    //   </FormControl>
+    // </Box>
+    <Box sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}>
+    <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id={label}>{label}</InputLabel>
+      <Select
+        labelId={label}
+        id={label}
+        value={choice}
+        label={label}
+        onChange={handleChange}
+      >
+        {rooms.length > 0 ? (
+          items.map((room) => (
+            <MenuItem
+              key={room._id}
+              value={room._id}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                px: 2,
+                position: "relative",
+                "&:hover .hoverImage": {
+                  opacity: 1,
+                },
+              }}
             >
-              {rooms?.map((room) => (
-                <MenuItem
-                  value={room._id}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    px: 2,
-                    position: "relative",
-                    "&:hover .hoverImage": {
-                      opacity: 1,
-                    },
+              <Box>
+                <Typography variant="body1">{room.roomNumber}</Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {room.bedType}
+                </Typography>
+              </Box>
+              <Box
+                className="hoverImage"
+                sx={{
+                  position: "absolute",
+                  right: 0,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: 50,
+                  height: 50,
+                  opacity: 0,
+                  transition: "opacity 0.3s ease",
+                  borderRadius: 4,
+                }}
+              >
+                <img
+                  src={room.image[0]}
+                  alt={room.roomNumber}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
                   }}
-                >
-                  <Box>
-                    <Typography variant="body1">{room.roomNumber}</Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {room.bedType}
-                    </Typography>
-                  </Box>
-                  <Box
-                    className="hoverImage"
-                    sx={{
-                      position: "absolute",
-                      right: 0,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      width: 50,
-                      height: 50,
-                      opacity: 0,
-                      transition: "opacity 0.3s ease",
-                      borderRadius: 4,
-                    }}
-                  >
-                    <img
-                      src={room.image[0]}
-                      alt={room.roomNumber}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </Box>
-                </MenuItem>
-              ))}
-            </Select>
-            <FormHelperText>Comfort with Design</FormHelperText>{" "}
-          </React.Fragment>
+                />
+              </Box>
+            </MenuItem>
+          ))
         ) : (
-          <React.Fragment>
-            <InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              value={choice}
-              label={label}
-              onChange={handleChange}
+          items.map((guest) => (
+            <MenuItem
+              key={guest}
+              value={guest}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                px: 2,
+              }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-            <FormHelperText>With label + helper text</FormHelperText>{" "}
-          </React.Fragment>
+              <Typography>{guest}</Typography>
+            </MenuItem>
+          ))
         )}
-      </FormControl>
-    </Box>
-  );
-})
+      </Select>
+      <FormHelperText>Select {rooms.length > 0 ? "Room" : "Guest Number"}</FormHelperText>
+    </FormControl>
+  </Box>
+);
 
-export default SelectOption
+  
+});
+
+export default SelectOption;

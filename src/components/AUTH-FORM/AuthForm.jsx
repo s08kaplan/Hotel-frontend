@@ -105,14 +105,14 @@ const AuthForm = ({ formType, schema }) => {
               : "Login"}
           </MyButton>
           
-            <Stack>
+            <Stack sx={{flexDirection:"row",justifyContent:"center", alignItems:"center"}}>
               <Box>
                 {formType === "login"
                   ? "Don't have an account?"
                   : "Already have an account"}
               </Box>
               <MyButton
-                // style={{ width: "5rem" }}
+                style={{margin:".5rem"}}
                 onClick={handleNavigate}
                 data-test="loginRegisterButton"
               >

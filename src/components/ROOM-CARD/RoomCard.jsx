@@ -17,9 +17,10 @@ import useRooms from "../../custom-hooks/useRooms";
 import { Box } from "@mui/material";
 import MyButton from "../FORM-INPUTS/MyButton";
 import logo from "../../assets/images/logo.png";
-import Grid from "@mui/material/Grid2"; // Import Grid from material UI
+import Grid from "@mui/material/Grid2";
+import RatingStatus from "../../components/RATING/RatingStatus"
 
-const RoomCard = ({ detail }) => {
+const RoomCard = () => {
   const { roomId } = useParams();
 
   const { rooms, roomDetail } = useSelector((state) => state.room);
@@ -33,6 +34,9 @@ const RoomCard = ({ detail }) => {
   useEffect(() => {
     roomId ? getRoomsInfo("roomDetail", roomId) : getRoomsInfo();
   }, [roomId]);
+
+  console.log(rooms);
+  console.log(roomDetail);
 
   return (
     <Grid container spacing={4} sx={{placeContent:"center"}}>
@@ -72,9 +76,7 @@ const RoomCard = ({ detail }) => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
+              <RatingStatus roomRating={roomDetail?.averageRating} id={roomDetail._id}/>
               <IconButton aria-label="share">
                 <ShareIcon />
               </IconButton>
@@ -131,9 +133,7 @@ const RoomCard = ({ detail }) => {
               <CardActions
                 sx={{ display: "flex", justifyContent: "space-around" }}
               >
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
+             <RatingStatus roomsRatings={room.averageRating}/>
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>

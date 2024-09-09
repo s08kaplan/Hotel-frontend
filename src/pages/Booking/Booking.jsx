@@ -6,7 +6,6 @@ import Calendar from "../../components/FORM-INPUTS/Calendar";
 import MyButton from "../../components/FORM-INPUTS/MyButton";
 import SelectOption from "../../components/FORM-INPUTS/SelectOption";
 import useRooms from "../../custom-hooks/useRooms";
-import BookingModal from "../../components/BOOKING-MODAL/BookingModal";
 import ErrorPage from "../../components/ERROR-PAGE/ErrorPage"
 
 const guestNumber=[]

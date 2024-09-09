@@ -52,9 +52,22 @@ const AuthForm = ({ formType, schema }) => {
   };
 
   return (
-    <Box sx={{padding:"1rem", display:"flex", justifyContent: "center", alignItems: "center"}}>
+    // <Box sx={{padding:"1rem", display:"flex", justifyContent: "center", alignItems: "center"}}>
       <Stack
-      sx={{justifyContent:"center", alignItems:"center",border:"2px solid gray", width:"25rem", borderRadius:".4rem", boxShadow:"0 4px 10px rgba(0, 0, 0, 0.3)"}}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        border: "2px solid gray",
+        width: "50%",
+        padding: "1rem",
+        borderRadius: ".4rem",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+
+        "@media (max-width: 500px)": {
+          border: "none",
+          boxShadow: "none",
+        },
+      }}
       >
         <Typography>{formType === "login" ? "" : "Register Form"}</Typography>
         <Box
@@ -123,7 +136,7 @@ const AuthForm = ({ formType, schema }) => {
         </Box>
         <DevTool control={control} />
       </Stack>
-    </Box>
+    {/* </Box> */}
   );
 };
 

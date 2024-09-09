@@ -2,14 +2,18 @@ import AppRouter from "./routes/AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/NAVBAR/Navbar";
 import Footer from "./components/FOOTER/Footer";
-// import "./App.css";
+import Box from "@mui/material/Box";
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <AppRouter />
-      <Footer />
+      <Box sx={{ display: "flex", flexDirection:"column", flexGrow: 1, minHeight:"100dvh" }}>
+        <Navbar />
+        <AppRouter />
+      </Box>
+      <Box>
+        <Footer />
+      </Box>
     </Router>
   );
 }

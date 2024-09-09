@@ -39,7 +39,7 @@ const RoomCard = () => {
   console.log(roomDetail);
 
   return (
-    <Grid container spacing={4} sx={{placeContent:"center"}}>
+    <Grid container spacing={4} sx={{placeContent:"center", padding:"1rem"}}>
       {" "}
       {/* Add spacing between grid items */}
       {roomId ? (

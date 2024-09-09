@@ -7,17 +7,13 @@ import ErrorModal from "../../components/ERROR-MODAL/ErrorModal";
 
 const Login = () => {
   // const { error } = useSelector((state) => state.auth);
- 
+
   return (
-      <Stack sx={{justifyContent:"center", alignItems: "center"}}>
-       {/* <ErrorPage/> */}
-       <ErrorModal/>
-          <Stack sx={{justifyContent:"center", alignItems: "center"}}>
-            <AuthForm formType={"login"} schema={"loginSchema"}/>
-          </Stack>
-        
-      </Stack>
-    
+    <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
+      {/* <ErrorPage/> */}
+      <ErrorModal />
+      <AuthForm formType={"login"} schema={"loginSchema"} />
+    </Stack>
   );
 };
 

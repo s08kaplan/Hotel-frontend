@@ -2,30 +2,44 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Box, IconButton, Typography, Stack } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useSwipeable } from "react-swipeable";
+import { useSelector } from "react-redux";
+import useRooms from "../../custom-hooks/useRooms";
 
-const images = [
-  {
-    src: "https://source.unsplash.com/random/800x600?nature",
-    label: "Beautiful Nature",
-  },
-  {
-    src: "https://source.unsplash.com/random/800x600?city",
-    label: "City View",
-  },
-  {
-    src: "https://source.unsplash.com/random/800x600?ocean",
-    label: "Ocean",
-  },
-  {
-    src: "https://source.unsplash.com/random/800x600?forest",
-    label: "Forest",
-  },
-];
+
+
+// const images = [
+//   {
+//     src: "https://cdn.pixabay.com/photo/2023/08/01/06/19/iceberg-8162195_1280.jpg",
+//     label: "Beautiful Nature",
+//   },
+//   {
+//     src: "https://cdn.pixabay.com/photo/2024/05/04/01/25/white-tailed-eagle-8738135_640.jpg",
+//     label: "City View",
+//   },
+//   {
+//     src: "https://cdn.pixabay.com/photo/2023/01/05/09/31/ferris-wheel-7698475_640.jpg",
+//     label: "Ocean",
+//   },
+//   {
+//     src: "https://cdn.pixabay.com/photo/2022/10/11/12/38/dog-7514202_640.jpg",
+//     label: "Forest",
+//   },
+// ];
 
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const totalImages = images.length;
+  const {rooms} = useSelector(state=>state.room)
+  const totalImages = rooms.length;
+  console.log(rooms)
+  const {getRoomsInfo} = useRooms()
+
+  useEffect(() => {
+    
+  
+    getRoomsInfo()
+  }, [])
+  
 
   // Autoplay interval time in ms (3000 = 3 seconds)
   const autoPlayTime = 3000;
@@ -76,12 +90,12 @@ const ImageSlider = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Slide */}
-      {images.map((image, index) => (
+      {rooms.map((room, index) => (
         <Box
           key={index}
           component="img"
-          src={image.src}
-          alt={image.label}
+          src={room.image[0]}
+          alt={room.roomNumber}
           sx={{
             display: currentIndex === index ? "block" : "none",
             width: "100%",
@@ -105,7 +119,7 @@ const ImageSlider = () => {
         }}
       >
         <Typography variant="h6">
-          {images[currentIndex].label}
+          {rooms[currentIndex]?.roomNumber}
         </Typography>
       </Box>
 
@@ -152,7 +166,7 @@ const ImageSlider = () => {
           transform: "translateX(-50%)",
         }}
       >
-        {images.map((_, index) => (
+        {rooms.map((_, index) => (
           <Box
             key={index}
             onClick={() => setCurrentIndex(index)}

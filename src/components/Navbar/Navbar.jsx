@@ -171,14 +171,13 @@ export default function Navbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        {token ? "Log Out" : "Login"}
+        {token ? "Log out" : "Login"}
       </MenuItem>
     </Menu>
   );
 
   const handleReview = () => {
     navigate("/messages");
-    // console.log("clicked", e.target)
   };
 
   return (
@@ -232,20 +231,6 @@ export default function Navbar() {
             ))}
           </Box>
           <Box sx={{display:"flex"}}>
-            {/* {(user?.isAdmin || user?.isStaff) &&
-
-            (<IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={5} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>)
-            } */}
-            
-
             {(user?.isAdmin || user?.isStaff) && (
              <Box onClick={handleReview}> <Review  /></Box>
             )}

@@ -52,7 +52,7 @@ const AuthForm = ({ formType, schema }) => {
   };
 
   return (
-    // <Box sx={{padding:"1rem", display:"flex", justifyContent: "center", alignItems: "center"}}>
+   
       <Stack
       sx={{
         justifyContent: "center",
@@ -136,7 +136,7 @@ const AuthForm = ({ formType, schema }) => {
         </Box>
         <DevTool control={control} />
       </Stack>
-    {/* </Box> */}
+    
   );
 };
 

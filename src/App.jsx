@@ -7,14 +7,24 @@ import Box from "@mui/material/Box";
 function App() {
   return (
     <Router>
-      <Box sx={{ display: "flex", flexDirection:"column", flexGrow: 1, minHeight:"100dvh" }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      <Box
+        sx={{
+          flexGrow: 1, 
+        }}
+      >
         <Navbar />
         <AppRouter />
       </Box>
-      <Box>
-        <Footer />
-      </Box>
-    </Router>
+      <Footer />
+    </Box>
+  </Router>
   );
 }
 

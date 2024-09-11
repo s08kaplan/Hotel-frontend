@@ -72,6 +72,7 @@ const navigation = [
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
   { name: "Booking", to: "/booking" },
+  { name: "Profile", to: "/profile" },
   // { name: "Login", to: "/login" },
   // { name: "Register", to: "/register" },
 ];
@@ -82,7 +83,6 @@ const navbarNavigation = navigation.filter((item, index) => index < 5 && item);
 export default function Navbar() {
   const { user, token } = useSelector((state) => state.auth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [profile, setProfile] = React.useState(false);
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
 
@@ -117,9 +117,7 @@ export default function Navbar() {
     </Box>
   );
 
-  const handleProfile = () => {
-    setProfile((prev) => !prev);
-  };
+ 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -138,7 +136,7 @@ export default function Navbar() {
   const handleMenuClose = (e) => {
     if (e.target.textContent == "Profile") {
       navigate("/profile");
-    } else if (e.target.textContent == "Log Out") {
+    } else if (e.target.textContent == "Log out") {
       token ? handleLogout() : navigate("/login");
     } else if (e.target.textContent == "Login") {
       navigate("/login");
@@ -253,7 +251,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+             {user?.image ? <img src={user?.image} alt={user?.username} width={50} style={{borderRadius:"50%"}} /> :<AccountCircle />}
             </IconButton>
           </Box>
         </Toolbar>

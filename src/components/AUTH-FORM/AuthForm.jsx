@@ -127,7 +127,7 @@ const AuthForm = ({ formType, schema }) => {
                     {...register(item.name)}
                   />
                 )}
-                <Box>{errors[item.name]?.message}</Box>
+                <Box sx={{color:"red"}}>{errors[item.name]?.message}</Box>
               </Stack>
             ))
           : formLoginInputs.map((item) => (
@@ -169,7 +169,7 @@ const AuthForm = ({ formType, schema }) => {
                     {...register(item.name)}
                   />
                 )}
-                <Typography>{errors[item.name]?.message}</Typography>
+                <Typography sx={{color:"red"}}>{errors[item.name]?.message}</Typography>
               </Stack>
             ))}
         <MyButton

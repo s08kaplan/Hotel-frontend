@@ -1,5 +1,5 @@
 import useAxios from "./useAxios"
-import { fetchStart, fetchFail, registerSuccess, loginSuccess, logoutSuccess  } from "../Features/authSlice"
+import { fetchStart, fetchFail, registerSuccess, loginSuccess, logoutSuccess, updateUserInfo  } from "../Features/authSlice"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
@@ -44,10 +44,23 @@ const useAuthCalls = () => {
         }
     }
 
+    const updateUser = async (userId, userInfo) => {
+        console.log(userId);
+        console.log(userInfo);
+        dispatch(fetchStart())
+        try {
+            const { data } =  await axiosWithToken.put(`users/${userId}`,userInfo)
+            dispatch(updateUserInfo(data))
+            
+        } catch (error) {
+            dispatch(fetchFail(error))
+            console.error(error)
+        }
+    }
 
 
 
-  return { registerUser, login, logout }
+  return { registerUser, login, logout, updateUser }
 }
 
 export default useAuthCalls

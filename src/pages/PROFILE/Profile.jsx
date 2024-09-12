@@ -45,35 +45,6 @@ const Profile = () => {
           onClick={handleNavigate}
           sx={{
             cursor: "pointer",
-            width: "230px",
-            display: "flex",
-            alignItems: "center",
-            transition: "color 0.3s",
-            color: "inherit",
-            "&:hover": {
-              color: "red",
-            },
-            "&:hover .arrow-icon": {
-              opacity: 1,
-              transform: "translateX(5px)",
-            },
-          }}
-        >
-          Update Personal Info
-          <ArrowForwardIcon
-            className="arrow-icon"
-            sx={{
-              marginLeft: "8px",
-              opacity: 0,
-              transition: "opacity 0.3s, transform 0.3s",
-            }}
-          />
-        </Typography>
-        <Typography
-          variant="h6"
-          onClick={handleNavigate}
-          sx={{
-            cursor: "pointer",
             width: "270px",
             display: "flex",
             alignItems: "center",
@@ -99,7 +70,6 @@ const Profile = () => {
           />
         </Typography>
       </Box>
-      {/* {showModal && <MyModal open={showModal} onClose={()=>setShowModal(prev=>!prev)}> </MyModal>} */}
     </Box>
   );
 };

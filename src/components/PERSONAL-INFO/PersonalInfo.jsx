@@ -19,10 +19,11 @@ const PersonalInfo = () => {
   const { user } = useSelector((state) => state.auth);
   const { updateUser } = useAuthCalls();
   const id = user?.id;
-const [close, setClose] = useState(false)
+const [open, setOpen] = useState(false)
 
-const onClose = () => {
-  setClose(true)
+const handleForm = () => {
+  setOpen(prev=>!prev)
+  
 }
   const {
     register,
@@ -58,7 +59,7 @@ const onClose = () => {
       )}
       <Typography>{user?.username}</Typography>
       <Typography>{user?.biography}</Typography>
-      <Box
+      {open ? <Box
         sx={{
           flexDirection: "column",
           justifyContent: "center",
@@ -78,7 +79,7 @@ const onClose = () => {
         }}
       >
         <Box
-            onClick={onClose}
+            onClick={handleForm}
           sx={{
             position: "absolute",
             top: "5px",
@@ -154,6 +155,36 @@ const onClose = () => {
           </MyButton>
         </Box>
       </Box>
+      :
+      <Typography
+          variant="h6"
+          onClick={handleForm}
+          sx={{
+            cursor: "pointer",
+            width: "230px",
+            display: "flex",
+            alignItems: "center",
+            transition: "color 0.3s",
+            color: "inherit",
+            "&:hover": {
+              color: "red",
+            },
+            "&:hover .arrow-icon": {
+              opacity: 1,
+              transform: "translateX(5px)",
+            },
+          }}
+        >
+          Update Personal Info
+          <ArrowForwardIcon
+            className="arrow-icon"
+            sx={{
+              marginLeft: "8px",
+              opacity: 0,
+              transition: "opacity 0.3s, transform 0.3s",
+            }}
+          />
+        </Typography>}
     </Box>
   );
 };

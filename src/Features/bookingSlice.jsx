@@ -25,7 +25,7 @@ export const bookingSlice = createSlice({
             fetchFail:(state, { payload }) => {
                 state.loading = false
                 state.error = true,
-                state.errorBooking = payload?.response?.data?.message
+                state.errorBookingMessage = payload?.response?.data?.message
             },
             clearBookingError: (state) => {
                 state.error = false;

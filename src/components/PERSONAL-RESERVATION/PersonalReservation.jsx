@@ -43,11 +43,11 @@ const PersonalReservation = () => {
             sx={{ "&:hover": { color: "red", transition: "0.5s ease" } }}
           />
         </Box>
+        <Typography sx={{textAlign:"center"}}>Dear {booking[0].userId.username}</Typography>
           {booking?.map(book => (
             <Box key={book._id} sx={{textAlign:"center",  margin:"1rem"}}>
-                <Typography>Dear {book.userId.username}</Typography>
-                <Typography>You made a reservation for a {book.roomId.bedType} room from {new Date(book.arrival_date).toLocaleDateString()} to {new Date(book.departure_date).toLocaleDateString()}</Typography>
-                <Typography>total fee for {book.night} {book.night == 1 ? "night" : "nights"} is ${book.price}</Typography>
+                <Typography>You made a reservation for a {book.roomId.bedType} room ({book.roomId.roomNumber}) from {new Date(book.arrival_date).toLocaleDateString()} to {new Date(book.departure_date).toLocaleDateString()}</Typography>
+                <Typography>with total fee for {book.night} {book.night == 1 ? "night" : "nights"} is ${book.price}</Typography>
                 <Typography>We are ready to serve you to make you have an enjoyable time in our Hotel </Typography>
             </Box>
         ))}  

@@ -15,6 +15,7 @@ const useAuthCalls = () => {
         try {
             const { data } = await axiosPublic.post("users",userInfo)
             dispatch(registerSuccess(data))
+            login(userInfo)
         } catch (error) {
             dispatch(fetchFail(error))
             console.error(error)

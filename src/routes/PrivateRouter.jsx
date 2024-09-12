@@ -32,7 +32,7 @@ const PrivateRouter = ({ allowedRoles = [] }) => {
 console.log(token);
 console.log(allowedRoles);
   // If user is not logged in or not active, redirect to login
-  if (!user || !user.isActive) {
+  if (!user || !user.isActive || !token) {
     return <Navigate to="/login" replace />;
   }
 

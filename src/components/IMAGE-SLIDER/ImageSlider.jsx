@@ -35,8 +35,6 @@ const ImageSlider = () => {
   const {getRoomsInfo} = useRooms()
 
   useEffect(() => {
-    
-  
     getRoomsInfo()
   }, [])
   

@@ -115,13 +115,21 @@ const Messages = () => {
         getRowHeight={() => "auto"}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
-        sx={{ border: 0, columnCount: { sm: 2 } }}
+        getRowClassName={(params) => (params.row.isRead ? "row-read" : "row-unread")}
+        sx={{ border: 0, columnCount: { sm: 2 },  '& .row-read': {
+          backgroundColor: 'green',
+          color: 'white',
+        },
+        '& .row-unread': {
+          backgroundColor: 'red',
+          color: 'white',
+        }, '&:hover': {backgroundColor:"#1976D2"}}}
         autoHeight
       />
       <MyButton
         color="primary"
         onClick={handleSubmit}
-        style={{ margin: "1rem auto" }}
+        style={{ margin: "2.5rem auto" }}
         disabled={loading || selectedIds.length === 0} // Disable if no messages are selected
       >
         {loading ? <CircularProgress size={24} /> : "Submit Read Status"}

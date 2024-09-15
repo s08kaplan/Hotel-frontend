@@ -8,6 +8,7 @@ import Unauthorized from "../pages/UNAUTHORIZED/Unauthorized";
 const Login = lazy(() => import("../pages/LOGIN/Login"));
 const Register = lazy(() => import("../pages/REGISTER/Register"));
 const Booking = lazy(() => import("../pages/BOOKING/Booking"));
+const Payment = lazy(() => import("../pages/PAYMENT/Payment"));
 const About = lazy(() => import("../pages/ABOUT/About"));
 const AboutDetails = lazy(() => import("../pages/ABOUT-DETAILS/AboutDetails"));
 const Contact = lazy(() => import("../pages/CONTACT/Contact"));
@@ -27,7 +28,8 @@ const AppRouter = () => {
           path="booking"
           element={<PrivateRouter allowedRoles={[ "admin", "staff", "user"]} />}
         >
-          <Route path="" element={<Booking />} />
+          <Route index element={<Booking />} />
+          <Route path="payment" element={<Payment />} />
         </Route>
         <Route
           path="profile"

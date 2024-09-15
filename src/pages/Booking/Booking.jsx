@@ -8,6 +8,7 @@ import SelectOption from "../../components/FORM-INPUTS/SelectOption";
 import useRooms from "../../custom-hooks/useRooms";
 import ErrorPage from "../../components/ERROR-PAGE/ErrorPage"
 import ErrorModal from "../../components/ERROR-MODAL/ErrorModal"
+import { useNavigate } from "react-router-dom";
 
 const guestNumber=[]
 for(let i in [...Array(10)]){
@@ -23,11 +24,10 @@ const Booking = () => {
   const { getRoomsInfo } = useRooms();
   const { getReservationInfo } = useBooking();
   const calendarRef = useRef();
-  // const guestRef = useRef();
-  // const guestNumberRef = useRef();
   const [selectedGuestNumber, setSelectedGuestNumber] = useState(""); 
   const [filteredRooms, setFilteredRooms] = useState([]); 
 
+  const navigate = useNavigate()
  
   const handleGuestNumberChange = (selectedGuests) => {
     setSelectedGuestNumber(selectedGuests);
@@ -70,6 +70,7 @@ const Booking = () => {
     };
     console.log("postData: ", postData);
     reservation(postData);
+    navigate("/booking/payment")
   };
   return (
     <Box

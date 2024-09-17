@@ -55,3 +55,17 @@ export const loginSchema = object({
       "password must contain at least one special (!/[@$!%*?&) character"
     ),
 });
+
+export const cardSchema = object({
+  fullName: string().required("Please enter a username"),
+  email: string()
+    .email("Enter a valid email address please")
+    .required("Email is required")
+    .test(
+      "email-validation",
+      "Please enter a valid email address",
+      function (value) {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
+      }
+    ),
+})

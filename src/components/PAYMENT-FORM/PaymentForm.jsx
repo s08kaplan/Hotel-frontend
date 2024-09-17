@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, CircularProgress, TextField, Alert } from '@mui/material';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useSelector } from 'react-redux';
+import { cardSchema } from '../../Helpers/formValidation';
+import { useNavigate } from 'react-router-dom';
+import useBooking from '../../custom-hooks/useBooking';
+import useAxios from '../../custom-hooks/useAxios';
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -9,9 +15,26 @@ const PaymentForm = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
+  const { user } = useSelector(state => state.auth)
+  const { booking } = useSelector(state => state.booking)
+  const { axiosWithToken } = useAxios()
+console.log(user);
+console.log(booking);
+const { getReservationInfo } = useBooking()
+
+useEffect(() => {
+  getReservationInfo(user?.id)
+}, [])
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
+  } = useForm({ resolver: yupResolver(cardSchema) });
   
-  const { handleSubmit, control, formState: { errors } } = useForm();
-  
+const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -41,56 +64,51 @@ console.log(cardElement);
       setLoading(false);
       
       // Handle backend API call with paymentMethod.id
-      
-
+      const  result  = await axiosWithToken.post("payments/create",{amount:booking[0]?.totalPrice, currency:"usd" })
+     console.log(result.data);
       // Make API call to save payment and finalize the transaction
     }
   };
+
+  useEffect(() => {
+    isSubmitSuccessful && reset()
+     
+    //  const timer = setTimeout(() => {
+    // navigate("/profile") 
+    // }, 2000);
+    // return(() => clearTimeout(timer))
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, margin: '1rem auto', p:".5rem" }}>
       
       {/* Full Name Field */}
-      <Controller
-        name="fullName"
-        control={control}
-        defaultValue=""
-        rules={{ required: "Full Name is required" }}
-        render={({ field }) => (
+     
           <TextField
-            {...field}
             label="Full Name"
+            name="fullName"
+            defaultValue={`${user?.firstName} ${user?.lastName}` }
             fullWidth
             error={!!errors.fullName}
             helperText={errors.fullName ? errors.fullName.message : ''}
             sx={{ mb: 2 }}
+            required
+            {...register("fullName")}
           />
-        )}
-      />
-
+        
       {/* Email Field */}
-      <Controller
-        name="email"
-        control={control}
-        defaultValue=""
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^\S+@\S+$/i,
-            message: "Invalid email address",
-          },
-        }}
-        render={({ field }) => (
           <TextField
-            {...field}
             label="Email"
+             name="email"
+             defaultValue={`${user?.email}`}
             fullWidth
             error={!!errors.email}
             helperText={errors.email ? errors.email.message : ''}
             sx={{ mb: 2 }}
+            required
+            {...register("email")}
           />
-        )}
-      />
+      
 
       {/* Card Element */}
       <Box sx={{ mb: 2, p: 2, border: '1px solid #ccc', borderRadius: '8px' }}>

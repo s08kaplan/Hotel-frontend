@@ -64,7 +64,7 @@ console.log(cardElement);
       setLoading(false);
       
       // Handle backend API call with paymentMethod.id
-      const  result  = await axiosWithToken.post("payments/create",{amount:booking[0]?.totalPrice, currency:"usd" })
+      const  result  = await axiosWithToken.post("payments/create",{amount:booking[0]?.totalPrice, currency:"usd", status:"succeeded" })
      console.log(result.data);
       // Make API call to save payment and finalize the transaction
     }

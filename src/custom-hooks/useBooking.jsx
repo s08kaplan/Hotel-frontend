@@ -32,7 +32,7 @@ const useBooking = () => {
       let url = "reservations";
 
       if (userId) {
-        url = `reservations?filter[userId]=${userId}`;
+        url = `reservations?filter[userId]=${userId}&sort[createdAt]=desc`;
       }
       const { data } = await axiosWithToken(url);
       console.log(data);

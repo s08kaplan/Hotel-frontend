@@ -43,6 +43,7 @@ const RoomCard = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection:{ xs:"column-reverse", sm:"column-reverse", md:"row-reverse", lg:"row-reverse", xl:"row-reverse"},
             justifyContent: "space-between",
             gap: "2rem",
             backgroundColor: "rgba(0,0,0,0.2)",
@@ -75,7 +76,7 @@ const RoomCard = () => {
               <img
                 src={Array.isArray(roomDetail?.image) && roomDetail?.image[0]}
                 alt={roomDetail?.roomNumber}
-                style={{ borderRadius: "25px" }}
+                style={{ borderRadius: "25px", width:"100%" }}
               />
               <Typography>{roomDetail?.description}</Typography>
               <Typography>Per night: ${roomDetail?.price}</Typography>
@@ -85,7 +86,7 @@ const RoomCard = () => {
       ) : (
         rooms.map((room) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={room._id}>
-            <Card sx={{ maxWidth: 345, mt:"1rem" }}>
+            <Card sx={{  mt:"1rem" }}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ backgroundColor: "red" }} aria-label="recipe">

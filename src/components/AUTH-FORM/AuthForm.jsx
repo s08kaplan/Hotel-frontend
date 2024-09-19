@@ -106,7 +106,6 @@ const AuthForm = ({ formType, schema }) => {
                       id={item.id}
                       name={item.name}
                       {...register(item.name)}
-
                     />
                     <IconButton
                   aria-label="toggle password visibility"

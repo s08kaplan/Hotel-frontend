@@ -20,6 +20,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/images/logo.png";
+import logo1 from "../../assets/images/logo-1.png";
 import { ListItemButton, Menu, MenuItem, Stack } from "@mui/material";
 import useAuthCalls from "../../custom-hooks/useAuthCalls";
 import Review from "../REVIEW/Review";
@@ -71,8 +72,8 @@ const navigation = [
   { name: "Rooms", to: "/rooms" },
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
-  { name: "Booking", to: "/booking" },
   { name: "Profile", to: "/profile" },
+  // { name: "Booking", to: "/booking" },
   // { name: "Login", to: "/login" },
   // { name: "Register", to: "/register" },
 ];
@@ -103,7 +104,7 @@ export default function Navbar() {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <img src={logo} alt="logo" width="150px" style={{ padding: "10px" }} />
+        <img src={logo1} alt="logo" width="150px" style={{ padding: "10px" }} />
       </Typography>
       <List>
         {navigation.map((item) => (
@@ -214,7 +215,7 @@ export default function Navbar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {navbarNavigation.map((item) => (
+            {navbarNavigation.map((item) => ( item.name !== "Profile" &&
               <Link
                 to={item.to}
                 key={item.name}

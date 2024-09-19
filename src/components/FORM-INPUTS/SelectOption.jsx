@@ -22,184 +22,9 @@ const SelectOption = forwardRef(({ id, label, value, rooms = [], guests=[], onCh
   // console.log("choice in select option", choice);
   // console.log("guests in select option", guests);
   const items = rooms.length > 0 ? rooms : guests;
+  console.log(items)
   return (
-    // <Box
-    //   sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}
-    // >
-    //   <FormControl sx={{ m: 1, minWidth: 120 }}>
-    //     {rooms ? (
-    //       <React.Fragment>
-    //         <InputLabel id={label}>Rooms</InputLabel>
-    //         <Select
-    //           labelId={label}
-    //           id={label}
-    //           value={choice}
-    //           label={label}
-    //           onChange={handleChange}
-    //         >
-    //           {rooms?.map((room) => (
-    //             <MenuItem
-    //               value={room._id}
-    //               sx={{
-    //                 display: "flex",
-    //                 justifyContent: "space-between",
-    //                 alignItems: "center",
-    //                 px: 2,
-    //                 position: "relative",
-    //                 "&:hover .hoverImage": {
-    //                   opacity: 1,
-    //                 },
-    //               }}
-    //             >
-    //               <Box>
-    //                 <Typography variant="body1">{room.roomNumber}</Typography>
-    //                 <Typography variant="body2" color="textSecondary">
-    //                   {room.bedType}
-    //                 </Typography>
-    //               </Box>
-    //               <Box
-    //                 className="hoverImage"
-    //                 sx={{
-    //                   position: "absolute",
-    //                   right: 0,
-    //                   top: "50%",
-    //                   transform: "translateY(-50%)",
-    //                   width: 50,
-    //                   height: 50,
-    //                   opacity: 0,
-    //                   transition: "opacity 0.3s ease",
-    //                   borderRadius: 4,
-    //                 }}
-    //               >
-    //                 <img
-    //                   src={room.image[0]}
-    //                   alt={room.roomNumber}
-    //                   style={{
-    //                     width: "100%",
-    //                     height: "100%",
-    //                     objectFit: "cover",
-    //                   }}
-    //                 />
-    //               </Box>
-    //             </MenuItem>
-    //           ))}
-    //         </Select>
-    //         <FormHelperText>Select Room</FormHelperText>{" "}
-    //       </React.Fragment>
-    //     ) :
-    //     guests ? (
-    //       <React.Fragment>
-    //         <InputLabel id={label}>{label}</InputLabel>
-    //         <Select
-    //           labelId={label}
-    //           id={label}
-    //           value={choice}
-    //           label={label}
-    //           onChange={handleChange}
-    //         >
-    //           {guests.map((guest=>  (
-    //             <MenuItem value={guest}
-    //             sx={{
-    //               display: "flex",
-    //               justifyContent: "space-between",
-    //               alignItems: "center",
-    //               px: 2,
-    //               width:"1rem"
-    //               // position: "relative",
-    //               // "&:hover .hoverImage": {
-    //               //   opacity: 1,
-    //               // },
-    //             }}
-    //             >
-    //              <Typography>{guest}</Typography>
-    //               </MenuItem>
-    //           )))}
-    //         </Select>
-    //         <FormHelperText>Select Guest Number</FormHelperText>{" "}
-    //       </React.Fragment>
-    //     )
-    //   :""
-    //   }
-    //   </FormControl>
-    // </Box>
-  //   <Box sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}>
-  //   <FormControl sx={{ m: 1, minWidth: 120 }}>
-  //     <InputLabel id={label}>{label}</InputLabel>
-  //     <Select
-  //       labelId={label}
-  //       id={label}
-  //       value={choice}
-  //       label={label}
-  //       onChange={handleChange}
-  //     >
-  //       {rooms.length > 0 ? (
-  //         rooms.map((room) => (
-  //           <MenuItem
-  //             key={room._id}
-  //             value={room._id}
-  //             sx={{
-  //               display: "flex",
-  //               justifyContent: "space-between",
-  //               alignItems: "center",
-  //               px: 2,
-  //               position: "relative",
-  //               "&:hover .hoverImage": {
-  //                 opacity: 1,
-  //               },
-  //             }}
-  //           >
-  //             <Box>
-  //               <Typography variant="body1">{room.roomNumber}</Typography>
-  //               <Typography variant="body2" color="textSecondary">
-  //                 {room.bedType}
-  //               </Typography>
-  //             </Box>
-  //             <Box
-  //               className="hoverImage"
-  //               sx={{
-  //                 position: "absolute",
-  //                 right: 0,
-  //                 top: "50%",
-  //                 transform: "translateY(-50%)",
-  //                 width: 50,
-  //                 height: 50,
-  //                 opacity: 0,
-  //                 transition: "opacity 0.3s ease",
-  //                 borderRadius: 4,
-  //               }}
-  //             >
-  //               <img
-  //                 src={room.image[0]}
-  //                 alt={room.roomNumber}
-  //                 style={{
-  //                   width: "100%",
-  //                   height: "100%",
-  //                   objectFit: "cover",
-  //                 }}
-  //               />
-  //             </Box>
-  //           </MenuItem>
-  //         ))
-  //       ) : (
-  //         guests.map((guest) => (
-  //           <MenuItem
-  //             key={guest}
-  //             value={guest}
-  //             sx={{
-  //               display: "flex",
-  //               justifyContent: "space-between",
-  //               alignItems: "center",
-  //               px: 2,
-  //             }}
-  //           >
-  //             <Typography>{guest}</Typography>
-  //           </MenuItem>
-  //         ))
-  //       )}
-  //     </Select>
-  //     <FormHelperText>Select {rooms.length > 0 ? "Room" : "Guest Number"}</FormHelperText>
-  //   </FormControl>
-  // </Box>
+    
   <Box sx={{ border: "2px solid gray", borderRadius: ".5rem", padding: "1rem" }}>
       <FormControl sx={{ m: 1, minWidth: 120 }} disabled={disabled}>
         <InputLabel id={label}>{label}</InputLabel>
@@ -238,9 +63,12 @@ const SelectOption = forwardRef(({ id, label, value, rooms = [], guests=[], onCh
                       transform: "translateY(-50%)",
                       width: 50,
                       height: 50,
-                      opacity: 0,
+                      opacity: 1,
                       transition: "opacity 0.3s ease",
                       borderRadius: 4,
+                      "&:hover": {
+                        opacity:1,
+                      }
                     }}
                   >
                     <img

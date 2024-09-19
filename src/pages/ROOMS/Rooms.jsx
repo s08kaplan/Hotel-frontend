@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import RoomCard from "../../components/ROOM-CARD/RoomCard";
 
 const Rooms = () => {

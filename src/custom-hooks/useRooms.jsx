@@ -40,7 +40,22 @@ const useRooms = () => {
     }
   };
 
-  return { getRoomsInfo, postRooms };
+  const updateRooms = async (url="rooms",id , info) => {
+    console.log("id in updateRooms", id);
+    console.log("info in updateRooms", info);
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.put(`rooms/${id}`,info);
+      console.log("updateRooms  : ", data);
+
+      dispatch(getRooms({url,data}));
+    } catch (error) {
+      dispatch(fetchFail());
+      console.error(error);
+    }
+  };
+
+  return { getRoomsInfo, postRooms, updateRooms };
 };
 
 export default useRooms;

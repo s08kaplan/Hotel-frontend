@@ -55,9 +55,9 @@ const RoomCard = () => {
           <Booking />
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Stack sx={{ flexDirection: "row", gap: ".5rem" }}>
-                <Typography>{roomDetail?.roomNumber}</Typography>
-                <Typography>{roomDetail?.bedType}</Typography>
+              <Stack sx={{ flexDirection: "row", gap: ".5rem", color:"black" }}>
+                <Typography sx={{fontWeight:"900"}}>{roomDetail?.roomNumber}</Typography>
+                <Typography sx={{fontWeight:"900"}}>{roomDetail?.bedType}</Typography>
               </Stack>
               <Stack
                 sx={{
@@ -66,7 +66,7 @@ const RoomCard = () => {
                   alignItems: "flex-end",
                 }}
               >
-                <Typography sx={{ textAlign: "left" }}>
+                <Typography sx={{ textAlign: "left", fontWeight:"700" }}>
                   Please rate this room.
                 </Typography>
                 <RatingStatus roomId={roomId} />
@@ -78,8 +78,8 @@ const RoomCard = () => {
                 alt={roomDetail?.roomNumber}
                 style={{ borderRadius: "25px", width:"100%" }}
               />
-              <Typography>{roomDetail?.description}</Typography>
-              <Typography>Per night: ${roomDetail?.price}</Typography>
+              <Typography sx={{fontWeight:"700"}}>{roomDetail?.description}</Typography>
+              <Typography  sx={{fontWeight:"700"}}>Per night: ${roomDetail?.price}</Typography>
             </Box>
           </Box>
         </Box>

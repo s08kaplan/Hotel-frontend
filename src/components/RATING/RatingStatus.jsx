@@ -4,29 +4,40 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { useSelector } from "react-redux";
 
-export default function RatingStatus({ roomRating, roomsRatings, id }) {
+export default function RatingStatus({ roomRating, readOnlyStatus, roomId }) {
   const { user } = useSelector(state => state.auth)
-    const { postRooms } = useRooms()
-  const [rating, setRating] = useState(null);
-//   console.log("rating component: ", roomRating);
-//   console.log("rating component: ", roomsRatings);
+  const { roomDetail } = useSelector(state => state.room)
+    const { updateRooms } = useRooms()
+  const [ratings, setRatings] = useState(0);
+  // console.log("rating component: ", roomRating);
+  // console.log("rating component: ", roomsRatings);
+  console.log("rating component rooms: ", roomDetail);
+  console.log("rating component rooms: ", roomId);
 console.log(user);
-const handleRating = (e)=> {
-    // console.log(typeof e.target.value);
-    setRating(e.target.value)
-    postRooms("rooms",id,rating)
-}
-  
+const handleRating = (e, newValue) => {
+
+  const ratingValue = Number(newValue);
+
+  const newRating = {
+    value: ratingValue,
+    userId: user?._id, 
+  };
+
+  setRatings(ratingValue);
+
+  updateRooms("rooms", roomId, { ratings: [newRating] });
+};
+
   return (
     <Stack spacing={1}>
-      {roomRating && user ? (
-        <Rating name="half-rating" defaultValue={roomRating} precision={0.5} onClick={handleRating}
+      {roomId && user ? (
+        <Rating name="half-rating" defaultValue={roomRating} precision={0.5} onChange={handleRating}
         
         />
       ) : (
         <Rating
           name="half-rating-read"
-          defaultValue={roomsRatings}
+          defaultValue={readOnlyStatus}
           precision={0.5}
           readOnly
         />

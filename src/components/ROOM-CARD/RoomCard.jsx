@@ -43,6 +43,7 @@ const RoomCard = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection:{ xs:"column-reverse", sm:"column-reverse", md:"row-reverse", lg:"row-reverse", xl:"row-reverse"},
             justifyContent: "space-between",
             gap: "2rem",
             backgroundColor: "rgba(0,0,0,0.2)",
@@ -54,9 +55,9 @@ const RoomCard = () => {
           <Booking />
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Stack sx={{ flexDirection: "row", gap: ".5rem" }}>
-                <Typography>{roomDetail?.roomNumber}</Typography>
-                <Typography>{roomDetail?.bedType}</Typography>
+              <Stack sx={{ flexDirection: "row", gap: ".5rem", color:"black" }}>
+                <Typography sx={{fontWeight:"900"}}>{roomDetail?.roomNumber}</Typography>
+                <Typography sx={{fontWeight:"900"}}>{roomDetail?.bedType}</Typography>
               </Stack>
               <Stack
                 sx={{
@@ -65,7 +66,7 @@ const RoomCard = () => {
                   alignItems: "flex-end",
                 }}
               >
-                <Typography sx={{ textAlign: "left" }}>
+                <Typography sx={{ textAlign: "left", fontWeight:"700" }}>
                   Please rate this room.
                 </Typography>
                 <RatingStatus roomId={roomId} />
@@ -75,17 +76,17 @@ const RoomCard = () => {
               <img
                 src={Array.isArray(roomDetail?.image) && roomDetail?.image[0]}
                 alt={roomDetail?.roomNumber}
-                style={{ borderRadius: "25px" }}
+                style={{ borderRadius: "25px", width:"100%" }}
               />
-              <Typography>{roomDetail?.description}</Typography>
-              <Typography>Per night: ${roomDetail?.price}</Typography>
+              <Typography sx={{fontWeight:"700"}}>{roomDetail?.description}</Typography>
+              <Typography  sx={{fontWeight:"700"}}>Per night: ${roomDetail?.price}</Typography>
             </Box>
           </Box>
         </Box>
       ) : (
         rooms.map((room) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={room._id}>
-            <Card sx={{ maxWidth: 345, mt:"1rem" }}>
+            <Card sx={{  mt:"1rem" }}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ backgroundColor: "red" }} aria-label="recipe">

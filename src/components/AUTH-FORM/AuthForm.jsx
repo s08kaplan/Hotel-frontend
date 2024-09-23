@@ -69,6 +69,7 @@ const AuthForm = ({ formType, schema }) => {
         padding: "1rem",
         margin: "1rem auto",
         borderRadius: ".4rem",
+        backgroundColor:"rgba(255,255,255,0.7)",
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
 
         "@media (max-width: 500px)": {

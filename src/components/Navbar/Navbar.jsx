@@ -87,7 +87,7 @@ export default function Navbar() {
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
 
-  // console.log(user);
+  console.log(user);
   // console.log(token);
 
   const handleDrawerToggle = () => {
@@ -252,7 +252,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-             {user?.image ? <img src={user?.image} alt={user?.username} width={50} style={{borderRadius:"50%"}} /> :<AccountCircle />}
+             {(user && user?.image) ? <img src={Array.isArray(user?.image) && user?.image[0]} alt={user?.username} width={50} style={{borderRadius:"50%"}} /> :<AccountCircle/>}
             </IconButton>
           </Box>
         </Toolbar>

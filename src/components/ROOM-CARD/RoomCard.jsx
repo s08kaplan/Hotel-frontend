@@ -46,7 +46,7 @@ const RoomCard = () => {
             flexDirection:{ xs:"column-reverse", sm:"column-reverse", md:"row-reverse", lg:"row-reverse", xl:"row-reverse"},
             justifyContent: "space-between",
             gap: "2rem",
-            backgroundColor: "rgba(0,0,0,0.2)",
+            backgroundColor: "rgba(0,0,0,0.3)",
             marginTop: "2rem",
             padding: "1rem",
             borderRadius: "25px",

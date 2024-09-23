@@ -20,58 +20,27 @@ const handleRating = (e, newValue) => {
 
   const newRating = {
     value: ratingValue,
-    userId: user?._id, 
+    userId: user?.id, 
   };
 
   setRatings(ratingValue);
 
-  updateRooms("rooms", roomId, { ratings: [newRating] });
+  updateRooms("rooms", roomId, { ratings: newRating });
 };
 
   return (
     <Stack spacing={1}>
       {roomId && user ? (
-        <Rating name="half-rating" defaultValue={roomRating} precision={0.5} onChange={handleRating}
+        <Rating name="half-rating" value={roomRating} onChange={handleRating}
         
         />
       ) : (
         <Rating
           name="half-rating-read"
-          defaultValue={readOnlyStatus}
-          precision={0.5}
+          value={readOnlyStatus}
           readOnly
         />
       )}
     </Stack>
   );
 }
-
-// import * as React from "react";
-// import Box from "@mui/material/Box";
-// import Rating from "@mui/material/Rating";
-// import Typography from "@mui/material/Typography";
-// import { useSelector } from "react-redux";
-
-// export default function RatingStatus({ roomId, readOnlyStatus }) {
-//   const [value, setValue] = React.useState(0);
-//   const { roomDetail } = useSelector((state) => state.room);
-
-//   console.log("rating", roomDetail);
-//   console.log(value)
-
-//   return (
-//     <Box sx={{ "& > legend": { mt: 2 } }}>
-//       {roomId ? (
-//         <Rating
-//           name="simple-controlled"
-//           value={value}
-//           onChange={(event, newValue) => {
-//             setValue(newValue);
-//           }}
-//         />
-//       ) : (
-//         <Rating name="read-only" value={readOnlyStatus} readOnly />
-//       )}
-//     </Box>
-//   );
-// }

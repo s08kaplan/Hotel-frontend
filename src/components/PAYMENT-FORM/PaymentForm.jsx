@@ -35,6 +35,8 @@ const PaymentForm = () => {
 
   const navigate = useNavigate();
 
+
+
   const onSubmit = async (data) => {
     setLoading(true);
     setErrorMessage("");
@@ -65,7 +67,7 @@ const PaymentForm = () => {
       const result = await axiosWithToken.post("payments/create", {
         amount: booking[0]?.totalPrice,
         currency: "usd",
-        status: "succeeded",
+        status: true,
       });
       console.log(result.data);
       // Make API call to save payment and finalize the transaction

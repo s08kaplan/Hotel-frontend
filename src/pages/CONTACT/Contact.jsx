@@ -49,7 +49,7 @@ console.log(user)
       <Typography variant="h3" align="center" gutterBottom>
         Get in Touch with Us
       </Typography>
-      <Typography variant="h6" align="center" color="textSecondary" sx={{ mb: 4 }}>
+      <Typography variant="h6" align="center" color="white" sx={{ mb: 4 }}>
         We'd love to hear from you. Whether you have questions about your stay, feedback, or
         any other inquiries, feel free to reach out.
       </Typography>

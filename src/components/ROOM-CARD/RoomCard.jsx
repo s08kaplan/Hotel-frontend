@@ -21,10 +21,12 @@ import Booking from "../../pages/BOOKING/Booking";
 
 const RoomCard = () => {
   const { roomId } = useParams();
-
+  const { token } = useSelector(state => state.auth)
   const { rooms, roomDetail } = useSelector((state) => state.room);
   const { getRoomsInfo } = useRooms();
   const navigate = useNavigate();
+
+  console.log(token);
 
   const handleNavigate = (id) => {
     navigate(`/room-detail/${id}`);
@@ -52,7 +54,7 @@ const RoomCard = () => {
             borderRadius: "25px",
           }}
         >
-          <Booking />
+          {token && <Booking />}
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Stack sx={{ flexDirection: "row", gap: ".5rem", color:"black" }}>

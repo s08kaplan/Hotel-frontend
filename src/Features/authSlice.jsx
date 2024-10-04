@@ -7,7 +7,7 @@ const initialState = {
       firstName: "",
       lastName: "",
       email: "",
-      image: [],
+      image: "",
       biography:"",
       isActive: "",
       isAdmin: "",
@@ -61,9 +61,9 @@ const initialState = {
           image: payload?.user?.image,
           biography: payload?.user?.biography || "",
           id: payload?.user?._id,
-          isActive: payload.user?.isActive,
-          isAdmin: payload.user?.isAdmin,
-          isStaff: payload.user?.isStaff,
+          isActive: payload?.user?.isActive,
+          isAdmin: payload?.user?.isAdmin,
+          isStaff: payload?.user?.isStaff,
         };
   
         state.token = payload?.token;

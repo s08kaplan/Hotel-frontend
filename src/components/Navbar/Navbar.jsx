@@ -252,7 +252,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-             {user &&  user?.image ? <img src={user?.image} alt={user?.username} width={50} style={{borderRadius:"50%"}} /> :<AccountCircle/>}
+             {(user && user?.image) ? <img src={user?.image} alt={user?.username} width={50} style={{borderRadius:"50%"}} /> :<AccountCircle/>}
             </IconButton>
           </Box>
         </Toolbar>

@@ -87,7 +87,7 @@ const PaymentForm = () => {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ maxWidth: 400, margin: "1rem auto", p: ".5rem" }}
+      sx={{ maxWidth: 400, margin: "1rem auto", p: ".5rem", backgroundColor:"rgba(255, 255, 255, 0.8)" }}
     >
       {/* Full Name Field */}
 
@@ -126,7 +126,7 @@ const PaymentForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        disabled={!stripe || loading}
+        disabled={(!booking?.length) || !stripe || loading }
         fullWidth
         startIcon={loading ? <CircularProgress size={20} /> : null}
       >

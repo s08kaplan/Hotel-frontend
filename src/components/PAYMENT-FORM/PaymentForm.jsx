@@ -29,7 +29,7 @@ const PaymentForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful },
     reset,
   } = useForm({ resolver: yupResolver(cardSchema) });
 
@@ -47,8 +47,6 @@ const PaymentForm = () => {
 
     // Get card details from CardElement
     const cardElement = elements.getElement(CardElement);
-
-    console.log(cardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",

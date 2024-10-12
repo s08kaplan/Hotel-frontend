@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -18,6 +19,7 @@ import MyButton from "../FORM-INPUTS/MyButton";
 import Grid from "@mui/material/Grid2"; // Import Grid from material UI
 import RatingStatus from "../RATING/RatingStatus";
 import Booking from "../../pages/BOOKING/Booking";
+import SocialMediaModal from "../SOCIAL-MEDIA/SocialMediaModal"
 
 const RoomCard = () => {
   const { roomId } = useParams();
@@ -54,7 +56,7 @@ const RoomCard = () => {
             borderRadius: "25px",
           }}
         >
-          {token && <Booking />}
+          {token ? <Booking /> : <Box sx={{position:"relative", top:"50%", fontWeight:"bold"}} ><Link to="/login" style={{textDecoration:"none", color:"#252525"}}>Please login first for booking</Link> </Box> }
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Stack sx={{ flexDirection: "row", gap: ".5rem", color:"black" }}>
@@ -95,11 +97,11 @@ const RoomCard = () => {
                     {room.roomNumber}
                   </Avatar>
                 }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
+                // action={
+                //   <IconButton aria-label="settings">
+                //     <MoreVertIcon />
+                //   </IconButton>
+                // }
                 title={room.bedType}
                 subheader={new Date(room.createdAt).toLocaleDateString()}
               />
@@ -133,9 +135,10 @@ const RoomCard = () => {
                 sx={{ display: "flex", justifyContent: "space-around" }}
               >
                 <RatingStatus readOnlyStatus={room.averageRating} />
-                <IconButton aria-label="share">
+                {/* <IconButton aria-label="share">
                   <ShareIcon />
-                </IconButton>
+                </IconButton> */}
+                <SocialMediaModal />
                 <MyButton onClick={() => handleNavigate(room._id)}>
                   Detail
                 </MyButton>

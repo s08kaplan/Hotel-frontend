@@ -19,16 +19,38 @@ import MyButton from "../FORM-INPUTS/MyButton";
 import Grid from "@mui/material/Grid2"; // Import Grid from material UI
 import RatingStatus from "../RATING/RatingStatus";
 import Booking from "../../pages/BOOKING/Booking";
-import SocialMediaModal from "../SOCIAL-MEDIA/SocialMediaModal"
+import SocialMediaModal from "../SOCIAL-MEDIA/SocialMediaModal";
+import useAxios from "../../custom-hooks/useAxios";
 
-const RoomCard = () => {
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #252525;
+  transition: all 1s ease;
+  &:hover {
+    color: white;
+  }
+`;
+
+function RoomCard() {
   const { roomId } = useParams();
-  const { token } = useSelector(state => state.auth)
+  const { token } = useSelector((state) => state.auth);
   const { rooms, roomDetail } = useSelector((state) => state.room);
   const { getRoomsInfo } = useRooms();
+  const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
 
   console.log(token);
+
+  const getRoomReservationInfo = async () => {
+    try {
+      const { data } = await axiosWithToken(
+        `reservations?filter[roomId]=${roomId}`
+      );
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleNavigate = (id) => {
     navigate(`/room-detail/${id}`);
@@ -36,6 +58,7 @@ const RoomCard = () => {
 
   useEffect(() => {
     roomId ? getRoomsInfo("roomDetail", roomId) : getRoomsInfo();
+    getRoomReservationInfo();
   }, [roomId]);
 
   console.log(roomId);
@@ -47,7 +70,13 @@ const RoomCard = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection:{ xs:"column-reverse", sm:"column-reverse", md:"row-reverse", lg:"row-reverse", xl:"row-reverse"},
+            flexDirection: {
+              xs: "column-reverse",
+              sm: "column-reverse",
+              md: "row-reverse",
+              lg: "row-reverse",
+              xl: "row-reverse",
+            },
             justifyContent: "space-between",
             gap: "2rem",
             backgroundColor: "rgba(0,0,0,0.3)",
@@ -56,12 +85,32 @@ const RoomCard = () => {
             borderRadius: "25px",
           }}
         >
-          {token ? <Booking /> : <Box sx={{position:"relative", top:"50%", fontWeight:"bold"}} ><Link to="/login" style={{textDecoration:"none", color:"#252525"}}>Please login first for booking</Link> </Box> }
+          {token ? (
+            <Booking />
+          ) : (
+            <Box
+              sx={{
+                position: "relative",
+                top: { md: "40%", lg: "50%", xl: "50%" },
+                fontWeight: "bold",
+              }}
+            >
+              <StyledLink to="/login">
+                Please login first for booking
+              </StyledLink>{" "}
+            </Box>
+          )}
           <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Stack sx={{ flexDirection: "row", gap: ".5rem", color:"black" }}>
-                <Typography sx={{fontWeight:"900"}}>{roomDetail?.roomNumber}</Typography>
-                <Typography sx={{fontWeight:"900"}}>{roomDetail?.bedType}</Typography>
+              <Stack
+                sx={{ flexDirection: "row", gap: ".5rem", color: "black" }}
+              >
+                <Typography sx={{ fontWeight: "900" }}>
+                  {roomDetail?.roomNumber}
+                </Typography>
+                <Typography sx={{ fontWeight: "900" }}>
+                  {roomDetail?.bedType}
+                </Typography>
               </Stack>
               <Stack
                 sx={{
@@ -70,7 +119,7 @@ const RoomCard = () => {
                   alignItems: "flex-end",
                 }}
               >
-                <Typography sx={{ textAlign: "left", fontWeight:"700" }}>
+                <Typography sx={{ textAlign: "left", fontWeight: "700" }}>
                   Please rate this room.
                 </Typography>
                 <RatingStatus roomId={roomId} />
@@ -80,17 +129,21 @@ const RoomCard = () => {
               <img
                 src={Array.isArray(roomDetail?.image) && roomDetail?.image[0]}
                 alt={roomDetail?.roomNumber}
-                style={{ borderRadius: "25px", width:"100%" }}
+                style={{ borderRadius: "25px", width: "100%" }}
               />
-              <Typography sx={{fontWeight:"700"}}>{roomDetail?.description}</Typography>
-              <Typography  sx={{fontWeight:"700"}}>Per night: ${roomDetail?.price}</Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                {roomDetail?.description}
+              </Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                Per night: ${roomDetail?.price}
+              </Typography>
             </Box>
           </Box>
         </Box>
       ) : (
         rooms.map((room) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={room._id}>
-            <Card sx={{  mt:"1rem" }}>
+            <Card sx={{ mt: "1rem" }}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ backgroundColor: "red" }} aria-label="recipe">
@@ -136,8 +189,8 @@ const RoomCard = () => {
               >
                 <RatingStatus readOnlyStatus={room.averageRating} />
                 {/* <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton> */}
+                          <ShareIcon />
+                        </IconButton> */}
                 <SocialMediaModal />
                 <MyButton onClick={() => handleNavigate(room._id)}>
                   Detail
@@ -149,6 +202,6 @@ const RoomCard = () => {
       )}
     </Grid>
   );
-};
+}
 
 export default RoomCard;

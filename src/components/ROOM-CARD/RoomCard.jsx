@@ -18,9 +18,8 @@ import { Box, Stack } from "@mui/material";
 import MyButton from "../FORM-INPUTS/MyButton";
 import Grid from "@mui/material/Grid2"; // Import Grid from material UI
 import RatingStatus from "../RATING/RatingStatus";
-import Booking from "../../pages/BOOKING/Booking";
+import Booking from "../BOOKING/Booking";
 import SocialMediaModal from "../SOCIAL-MEDIA/SocialMediaModal";
-import useAxios from "../../custom-hooks/useAxios";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -36,21 +35,11 @@ function RoomCard() {
   const { token } = useSelector((state) => state.auth);
   const { rooms, roomDetail } = useSelector((state) => state.room);
   const { getRoomsInfo } = useRooms();
-  const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
 
   console.log(token);
 
-  const getRoomReservationInfo = async () => {
-    try {
-      const { data } = await axiosWithToken(
-        `reservations?filter[roomId]=${roomId}`
-      );
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
 
   const handleNavigate = (id) => {
     navigate(`/room-detail/${id}`);
@@ -58,7 +47,6 @@ function RoomCard() {
 
   useEffect(() => {
     roomId ? getRoomsInfo("roomDetail", roomId) : getRoomsInfo();
-    getRoomReservationInfo();
   }, [roomId]);
 
   console.log(roomId);

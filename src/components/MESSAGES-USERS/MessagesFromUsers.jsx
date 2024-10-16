@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import useMessages from "../../custom-hooks/useMessages";
 import { useSelector } from "react-redux";
 
-const Review = () => {
+const MessagesFromUsers = () => {
   const { readUnreadInfo } = useMessages();
   const { unread } = useSelector((state) => state.message);
 
@@ -24,4 +24,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default MessagesFromUsers;

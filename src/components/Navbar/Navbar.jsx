@@ -23,7 +23,7 @@ import logo from "../../assets/images/logo.png";
 import logo1 from "../../assets/images/logo-1.png";
 import { ListItemButton, Menu, MenuItem, Stack } from "@mui/material";
 import useAuthCalls from "../../custom-hooks/useAuthCalls";
-import Review from "../REVIEW/Review";
+import Review from "../MESSAGES-USERS/MessagesFromUsers";
 
 // ! styled elements for search part
 const Search = styled("div")(({ theme }) => ({
@@ -176,7 +176,7 @@ export default function Navbar() {
   );
 
   const handleReview = () => {
-    navigate("/messages");
+    navigate("/authorized/messages");
   };
 
   return (

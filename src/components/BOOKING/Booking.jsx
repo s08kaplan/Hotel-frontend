@@ -8,7 +8,7 @@ import SelectOption from "../FORM-INPUTS/SelectOption";
 import useRooms from "../../custom-hooks/useRooms";
 import ErrorPage from "../ERROR-PAGE/ErrorPage";
 import ErrorModal from "../ERROR-MODAL/ErrorModal";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 // const guestNumber = [];
 // for (let i in [...Array(10)]) {
@@ -21,7 +21,12 @@ const Booking = () => {
   const { rooms, roomDetail } = useSelector((state) => state.room);
   const { reservation } = useBooking();
 
-  const { roomId } = useParams()
+  const { roomId } = useParams();
+
+  const location = useLocation();
+
+  console.log(location.pathname.split("/")[1]);
+  const path = location.pathname.split("/")[1];
 
   // console.log(roomId);
   console.log(roomDetail);
@@ -64,22 +69,50 @@ const Booking = () => {
   // console.log("rooms: ", rooms);
   // console.log("user in booking: ", user);
 
+  console.log(
+    "calendarRef.current: ",
+    calendarRef.current?.getSelectedDateRange().arrival_date
+  );
+  console.log(
+    "calendarRef.current: ",
+    calendarRef.current?.getSelectedDateRange().departure_date
+  );
+
+  const totalDays =
+    new Date(
+      calendarRef.current?.getSelectedDateRange().departure_date -
+        calendarRef.current?.getSelectedDateRange().arrival_date
+    ) /
+    (1000 * 60 * 60 * 24);
+
+  const totalPrice = totalDays * roomDetail?.price;
+
+  console.log(totalDays);
+  console.log(totalPrice);
+
   const handleSubmit = () => {
     const selectedDateRange = calendarRef.current.getSelectedDateRange();
     const postData = {
       arrival_date: selectedDateRange.arrival_date,
       departure_date: selectedDateRange.departure_date,
       username: user?.username,
-      roomNumber:roomDetail?.roomNumber,
-      price:roomDetail?.price
+      roomNumber: roomDetail?.roomNumber,
+      // price:roomDetail?.price
+      price: totalPrice,
       // guest_number: selectedGuestNumber,
     };
     console.log("postData: ", postData);
     reservation(postData);
-    navigate("/payment");
+    navigate("/payment", {
+      state: {
+        from: path,
+        data: {
+          total: totalPrice,
+        },
+      },
+    });
   };
-  // console.log("calendarRef.current: ",calendarRef.current.getSelectedDateRange().arrival_date);
-  // console.log("calendarRef.current: ",calendarRef.current.getSelectedDateRange().departure_date);
+
   return (
     <Box
       sx={{
@@ -89,7 +122,6 @@ const Booking = () => {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        
       }}
     >
       {/* <ErrorPage/> */}
@@ -139,7 +171,7 @@ const Booking = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap:"1rem"
+              gap: "1rem",
             }}
           >
             <MyButton

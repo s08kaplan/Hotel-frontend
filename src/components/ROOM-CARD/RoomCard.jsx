@@ -36,9 +36,8 @@ function RoomCard() {
   const { rooms, roomDetail } = useSelector((state) => state.room);
   const { getRoomsInfo } = useRooms();
   const navigate = useNavigate();
-
+ 
   console.log(token);
-
 
 
   const handleNavigate = (id) => {

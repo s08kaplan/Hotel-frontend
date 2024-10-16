@@ -82,7 +82,6 @@ const Calendar = forwardRef((props, ref) => {
 
   // console.log(reservedDates);
  
-
   useEffect(() => {
     getRoomReservationInfo();
 

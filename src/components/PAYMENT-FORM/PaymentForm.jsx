@@ -20,10 +20,10 @@ const PaymentForm = () => {
   const { axiosWithToken } = useAxios();
 
   const location = useLocation()
-  const { from, data } = location.state || {}
+  const { from, data:{total} } = location.state || {}
 
   console.log("from: ", from);
-  console.log("data from location: ", data);
+  console.log("data from location: ", total);
 
   console.log(user);
   console.log(booking);
@@ -71,7 +71,7 @@ const PaymentForm = () => {
 
       // Handle backend API call with paymentMethod.id
       const result = await axiosWithToken.post("payments/create", {
-        amount: data?.total * 100,
+        amount: total * 100,
         currency: "usd",
         status: true,
       });
@@ -132,7 +132,7 @@ const PaymentForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        disabled={!(data?.total) || !stripe || loading }
+        disabled={!total || !stripe || loading }
         fullWidth
         startIcon={loading ? <CircularProgress size={20} /> : null}
       >

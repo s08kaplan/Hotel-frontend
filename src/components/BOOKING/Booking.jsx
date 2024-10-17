@@ -4,16 +4,11 @@ import useBooking from "../../custom-hooks/useBooking";
 import { Box, Stack, Typography } from "@mui/material";
 import Calendar from "../FORM-INPUTS/Calendar";
 import MyButton from "../FORM-INPUTS/MyButton";
-import SelectOption from "../FORM-INPUTS/SelectOption";
 import useRooms from "../../custom-hooks/useRooms";
-import ErrorPage from "../ERROR-PAGE/ErrorPage";
 import ErrorModal from "../ERROR-MODAL/ErrorModal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-// const guestNumber = [];
-// for (let i in [...Array(10)]) {
-//   i !== "0" && guestNumber.push(Number(i));
-// }
+
 
 const Booking = () => {
   const { user } = useSelector((state) => state.auth);
@@ -39,25 +34,6 @@ const Booking = () => {
 
   const navigate = useNavigate();
 
-  // const handleGuestNumberChange = (selectedGuests) => {
-  //   setSelectedGuestNumber(selectedGuests);
-
-  //   const availableRooms = rooms.filter((room) => {
-  //     switch (true) {
-  //       case selectedGuests === 1:
-  //         return room.bedType === "single";
-  //       case selectedGuests === 2:
-  //         return room.bedType === "double";
-  //       case selectedGuests > 2 && selectedGuests <= 4:
-  //         return room.bedType === "family";
-  //       case selectedGuests >= 5:
-  //         return room.bedType === "king";
-  //       default:
-  //         return false;
-  //     }
-  //   });
-  //   setFilteredRooms(availableRooms);
-  // };
 
   useEffect(() => {
     getRoomsInfo("roomDetail", roomId);
@@ -78,27 +54,20 @@ const Booking = () => {
     calendarRef.current?.getSelectedDateRange().departure_date
   );
 
-  const totalDays =
-    new Date(
-      calendarRef.current?.getSelectedDateRange().departure_date -
-        calendarRef.current?.getSelectedDateRange().arrival_date
-    ) /
-    (1000 * 60 * 60 * 24);
-
-  const totalPrice = totalDays * roomDetail?.price;
-
-  console.log(totalDays);
-  console.log(totalPrice);
-
+ 
   const handleSubmit = () => {
     const selectedDateRange = calendarRef.current.getSelectedDateRange();
+    const arrival = selectedDateRange.arrival_date
+    const departure = selectedDateRange.departure_date
+    const totalDays = new Date( departure - arrival) / (1000 * 60 * 60 * 24)
+    const totalPrice = totalDays * roomDetail?.price
     const postData = {
-      arrival_date: selectedDateRange.arrival_date,
-      departure_date: selectedDateRange.departure_date,
+      arrival_date: arrival,
+      departure_date: departure,
       username: user?.username,
       roomNumber: roomDetail?.roomNumber,
       // price:roomDetail?.price
-      price: totalPrice,
+      price: totalPrice ,
       // guest_number: selectedGuestNumber,
     };
     console.log("postData: ", postData);
@@ -140,31 +109,6 @@ const Booking = () => {
         <Stack
           sx={{ flexDirection: "column", gap: "1rem", margin: ".5rem auto" }}
         >
-          {/* <Box
-            sx={{
-              display: "flex",
-              flexDirection: {
-                xs: "column",
-                sm: "row",
-                md: "row",
-              },
-              gap: ".4rem",
-            }}
-          >
-            <SelectOption label="Guests" guests={guestNumber} ref={guestNumberRef} />
-          <SelectOption label="Rooms" rooms={rooms} ref={guestRef} />
-            <SelectOption
-              label="Guests"
-              guests={guestNumber}
-              onChange={handleGuestNumberChange}
-            />
-
-            <SelectOption
-              label="Rooms"
-              rooms={filteredRooms}
-              disabled={filteredRooms.length === 0} // Disable if no rooms match
-            />
-          </Box> */}
           <Box
             sx={{
               display: "flex",
@@ -180,9 +124,6 @@ const Booking = () => {
             >
               Make a reservation
             </MyButton>
-            {/* <MyButton disabled={filteredRooms.length === 0}>
-              New reservation
-            </MyButton> */}
           </Box>
         </Stack>
       </Stack>

@@ -31,7 +31,7 @@ const handleRating = (e, newValue) => {
   return (
     <Stack spacing={1}>
       {roomId && user ? (
-        <Rating name="simple-controlled" value={roomRating} onChange={handleRating}
+        <Rating  name="simple-controlled" value={roomRating} onChange={handleRating}
         
         />
       ) : (

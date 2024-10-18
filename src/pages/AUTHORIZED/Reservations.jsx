@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
+import AuthorizedTable from './AuthorizedTable';
 
 
 
@@ -13,22 +14,40 @@ const Reservations = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
     {
-      field: 'age',
-      headerName: 'Age',
+      field: "image",
+      headerName: "Image",
+      width: 100,
+      renderCell: (params) => (
+        <img
+          src={params.value}
+          alt="profile"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            borderRadius:"50%"
+          }}
+        />
+      ),
+    },
+    { field: 'bedType', headerName: 'Type', width: 90 },
+    { field: 'arrival_date', headerName: 'Arrival', width: 90 },
+    { field: 'departure_date', headerName: 'Departure', width: 90 },
+    {
+      field: 'totalPrice',
+      headerName: 'Price',
       type: 'number',
       width: 90,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
+      field: 'userName',
+      headerName: 'Username',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
-      valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-    },
+      width: 100,
+    }
   ];
   
   const rows = [
@@ -45,16 +64,17 @@ const Reservations = () => {
 
   console.log(reservations);
   return (
-    <Paper sx={{ height: 400, width: '100%' }}>
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      initialState={{ pagination: { paginationModel } }}
-      pageSizeOptions={[5, 10]}
-      checkboxSelection
-      sx={{ border: 0 }}
+    <AuthorizedTable
+    columns={columns}
+    rows={rows}
+    dropdownLabel="Clients"
+    // renderDropdownItem={(row) => (
+    //   <div>
+    //     <div>{row.username} (email: {row.email})</div>
+    //     <div>ID: {row.id}</div>
+    //   </div>
+    // )}
     />
-  </Paper>
   )
 }
 

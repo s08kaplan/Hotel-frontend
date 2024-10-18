@@ -64,7 +64,7 @@ const Dashboard = () => {
         sx={{
           position: "sticky",
           left: "0",
-          top: {sm:"0", md:"76px", lg:"76px", xl:"76px"},
+          top: {sm:"0", md:"0", lg:"1rem", xl:"1rem"},
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -73,11 +73,12 @@ const Dashboard = () => {
           width: "10rem",
           height: "10rem",
           p: "1.5rem",
+          backgroundColor:"rgba(234, 184, 219,0.3)",
         }}
       >
-        <Stack onClick={handleShow}>Clients</Stack>
-        <Stack onClick={handleShow}>Messages</Stack>
-        <Stack onClick={handleShow}>Reservations</Stack>
+        <Stack onClick={handleShow} sx={{"&:hover":{cursor:"pointer"}}}>Clients</Stack>
+        <Stack onClick={handleShow} sx={{"&:hover":{cursor:"pointer"}}}>Messages</Stack>
+        <Stack onClick={handleShow} sx={{"&:hover":{cursor:"pointer"}}}>Reservations</Stack>
       </Box>
       <Box sx={{display:"flex", justifyContent:"flex-end",width:"80%"}}>
         {show.client && <Clients />}

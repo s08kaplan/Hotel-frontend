@@ -27,8 +27,8 @@ const Messages = () => {
     isRead: msg.isRead,
   })) || [{ username: "", message: "There is no message to read" }];
 
-  const [selectedIds, setSelectedIds] = useState([]); // Track selected message IDs
-  const [loading, setLoading] = useState(false); // Track loading state for the submit button
+  const [selectedIds, setSelectedIds] = useState([]); 
+  const [loading, setLoading] = useState(false); 
 
   // Function to handle read checkbox toggle
   const handleCheckboxToggle = (id) => {
@@ -47,7 +47,6 @@ const Messages = () => {
       // Make the API call to update the read status
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
 
-      // Optionally, you can update the local state to mark selected rows as read
       getMessageInfo(); // Re-fetch the message data after updating read status
     } catch (error) {
       console.error("Failed to update messages:", error);
@@ -96,8 +95,8 @@ const Messages = () => {
       width: 100,
       renderCell: (params) => (
         <Checkbox
-          checked={selectedIds.includes(params.row.id)} // Check if the row is selected
-          onChange={() => handleCheckboxToggle(params.row.id)} // Handle checkbox toggle
+          checked={selectedIds.includes(params.row.id)} 
+          onChange={() => handleCheckboxToggle(params.row.id)} 
           color="primary"
         />
       ),
@@ -130,7 +129,7 @@ const Messages = () => {
         color="primary"
         onClick={handleSubmit}
         style={{ margin: "2.5rem auto" }}
-        disabled={loading || selectedIds.length === 0} // Disable if no messages are selected
+        disabled={loading || selectedIds.length === 0} 
       >
         {loading ? <CircularProgress size={24} /> : "Submit Read Status"}
       </MyButton>

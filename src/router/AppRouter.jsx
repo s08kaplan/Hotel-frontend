@@ -66,7 +66,7 @@ const AppRouter = () => {
               </AuthorizedLayout>
             }
           />
-          <Route
+          {/* <Route
             path="reservations"
             element={
               <AuthorizedLayout>
@@ -89,7 +89,7 @@ const AppRouter = () => {
                 <Messages />
               </AuthorizedLayout>
             }
-          />
+          /> */}
         </Route>
       </Routes>
     </SuspenseWrapper>

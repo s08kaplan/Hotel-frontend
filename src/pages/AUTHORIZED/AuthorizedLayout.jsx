@@ -11,8 +11,10 @@ const AuthorizedLayout = ({ children }) => {
         backgroundAttachment: "fixed",
         position: "absolute",
         height: "100dvh",
-        width: "100vw",
+        width: "100%",
         padding: "1rem",
+        "overflow-x":"hidden",
+        "overflow-y":"auto"
     }
   return (
     <Box sx={layoutStyle}>

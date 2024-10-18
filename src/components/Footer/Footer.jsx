@@ -1,6 +1,5 @@
-// import { FaTelegramPlane } from "react-icons/fa";
-
-import { Box, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography  from "@mui/material/Typography";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -57,9 +56,10 @@ const Footer = () => {
         alignItems: "center",
         height: "5rem",
         padding: "0 10%",
+        color:"#fff"
       }}
     >
-      <Typography  sx={{fontWeight:"700"}}>© 2024 PyScript Hotels Group</Typography>
+      <Typography  sx={{fontWeight:"700","@media (max-width: 530px) and (min-width: 344px)":{fontSize:"0.9rem"} }}>© 2024 PyScript Hotels Group</Typography>
       <Box sx={containerStyles}>
         <WhatsAppIcon className="icon icon-whatsapp" sx={iconStyles} />
         <LinkedInIcon className="icon icon-linkedin" sx={iconStyles} />

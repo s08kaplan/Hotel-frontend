@@ -1,11 +1,11 @@
-import AppRouter from "./routes/AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import AppRouter from "./router/AppRouter";
 import Navbar from "./components/NAVBAR/Navbar";
 import Footer from "./components/FOOTER/Footer";
 import Box from "@mui/material/Box";
-import backgroundimg from "./assets/images/backgroundimg.jpg";
+import backgroundImg from "./assets/images/backgroundImg-2.jpg";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_SECRET_PAYMENT_KEY);
@@ -20,10 +20,10 @@ function App() {
             display: "flex",
             flexDirection: "column",
             minHeight: "100vh",
-            backgroundImage: `url(${backgroundimg})`,
-            backgroundSize: "cover", // Ensures the image covers the entire background
-            backgroundPosition: "center", // Centers the image
-            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundImage: `url(${backgroundImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat", 
             backgroundAttachment:"fixed",
             
           }}

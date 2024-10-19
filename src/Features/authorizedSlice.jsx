@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 clients:[],
-messages: [],
+// messages: [],
 reservations: [],
 loading: false,
 error: false
@@ -19,8 +19,9 @@ const authorizedSlice = createSlice({
 
    getData: (state, { payload }) => {
         state.clients = payload[0]
-        state.messages = payload[1]
-        state.reservations = payload[2]
+        state.reservations = payload[1]
+        // state.messages = payload[1]
+        // state.reservations = payload[2]
         state.loading = false
         state.error = false
     },

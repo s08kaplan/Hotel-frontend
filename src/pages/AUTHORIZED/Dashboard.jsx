@@ -57,7 +57,7 @@ const Dashboard = () => {
         gap: "1rem",
         width: "100%",
         height: "100%",
-        p: ".5rem",
+        // p: ".5rem",
       }}
     >
       <Box
@@ -80,7 +80,7 @@ const Dashboard = () => {
         <Stack onClick={handleShow} sx={{"&:hover":{cursor:"pointer"}}}>Messages</Stack>
         <Stack onClick={handleShow} sx={{"&:hover":{cursor:"pointer"}}}>Reservations</Stack>
       </Box>
-      <Box sx={{display:"flex", justifyContent:"flex-end",width:"80%"}}>
+      <Box sx={{display:"flex", justifyContent:"flex-end", alignItems:"flex-start", width:"100%"}}>
         {show.client && <Clients />}
         {show.message && <Messages />}
         {show.reservation && <Reservations />}

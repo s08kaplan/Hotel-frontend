@@ -129,7 +129,7 @@ function RoomCard() {
         rooms.map((room) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={room._id}>
             <Card
-              sx={{ mt: "1rem", backgroundColor: "rgba(90, 145, 197, 0.7)" }}
+              sx={{ mt: "1rem", backgroundColor: "rgba(90, 145, 197, 0.7)", color:"#fff" }}
             >
               <CardHeader
                 avatar={
@@ -140,11 +140,7 @@ function RoomCard() {
                     {room.roomNumber}
                   </Avatar>
                 }
-                // action={
-                //   <IconButton aria-label="settings">
-                //     <MoreVertIcon />
-                //   </IconButton>
-                // }
+              
                 title={room.bedType}
                 subheader={new Date(room.createdAt).toLocaleDateString()}
               />
@@ -168,7 +164,7 @@ function RoomCard() {
                   variant="body2"
                   sx={{
                     width: "25rem",
-                    color: "text.secondary",
+                    color: "#fff",
                     webkitBoxOrient: "vertical",
                     webkitLineClamp: "3",
                     overflow: "hidden",
@@ -186,11 +182,12 @@ function RoomCard() {
               <CardActions
                 sx={{ display: "flex", justifyContent: "space-around" }}
               >
+                {/* RATING */}
                 <RatingStatus readOnlyStatus={room.averageRating} />
-                {/* <IconButton aria-label="share">
-                          <ShareIcon />
-                        </IconButton> */}
+
+               {/* SOCIAL MEDIA SHARE */}
                 <SocialMediaModal />
+                
                 <MyButton onClick={() => handleNavigate(room._id)}>
                   Detail
                 </MyButton>

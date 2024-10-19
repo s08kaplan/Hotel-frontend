@@ -10,18 +10,19 @@ const useAuthorized = () => {
   const getAuthorizedData = async () => {
     dispatch(fetchStart());
     try {
-      const [clients, messages, reservations] = await Promise.all([
+      // const [clients, messages, reservations] = await Promise.all([
+      const [clients, reservations] = await Promise.all([
         axiosWithToken("users"),
-        axiosWithToken("messages"),
+        // axiosWithToken("messages"),
         axiosWithToken("reservations"),
       ]);
       console.log(clients);
-      console.log(messages);
+      // console.log(messages);
       console.log(reservations);
       dispatch(
         getData([
           clients?.data?.data,
-          messages?.data?.data,
+          // messages?.data?.data,
           reservations?.data?.data,
         ])
       );

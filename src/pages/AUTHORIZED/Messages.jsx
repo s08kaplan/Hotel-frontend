@@ -12,9 +12,12 @@ const paginationModel = { page: 0, pageSize: 5 };
 const Messages = () => {
   const { getMessageInfo } = useMessages();
   const { message } = useSelector((state) => state.message);
+  // const { messages } = useSelector((state) => state.authorized);
   const { axiosWithToken } = useAxios();
   const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // console.log("messages from authorized slice: ", messages);
 
   useEffect(() => {
     getMessageInfo();
@@ -28,6 +31,14 @@ const Messages = () => {
     message: msg.content,
     isRead: msg.isRead,
   })) || [{ username: "", message: "There is no message to read" }];
+  // const rows = messages?.map((msg) => ({
+  //   id: msg._id,
+  //   firstName: msg.userId?.firstName,
+  //   lastName: msg.userId?.lastName,
+  //   username: msg.userId?.username,
+  //   message: msg.content,
+  //   isRead: msg.isRead,
+  // })) || [{ username: "", message: "There is no message to read" }];
 
 
 
@@ -41,16 +52,16 @@ const Messages = () => {
     );
   };
 
-
+ 
 
   const handleSubmit = async () => {
     setLoading(true);
 
     try {
-      // Make the API call to update the read status
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
 
-       getMessageInfo(); // Re-fetch the message data after updating read status
+      await getMessageInfo(); // Re-fetch the message data after updating read status
+      setSelectedIds([])
     } catch (error) {
       console.error("Failed to update messages:", error);
     } finally {

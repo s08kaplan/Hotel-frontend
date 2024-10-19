@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
 import useAuthorized from "../../custom-hooks/useAuthorized";
 import Stack from "@mui/material/Stack";
 import Clients from "./Clients";

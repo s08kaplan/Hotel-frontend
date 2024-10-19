@@ -82,10 +82,10 @@ const Clients = () => {
     rows={rows}
     dropdownLabel="Clients"
     renderDropdownItem={(row) => (
-      <div>
+      <>
         <div>{row.username} (email: {row.email})</div>
         <div>ID: {row.id}</div>
-      </div>
+      </>
     )}
     />
   );

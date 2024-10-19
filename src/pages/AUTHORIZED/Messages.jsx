@@ -13,6 +13,8 @@ const Messages = () => {
   const { getMessageInfo } = useMessages();
   const { message } = useSelector((state) => state.message);
   const { axiosWithToken } = useAxios();
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getMessageInfo();
@@ -27,8 +29,7 @@ const Messages = () => {
     isRead: msg.isRead,
   })) || [{ username: "", message: "There is no message to read" }];
 
-  const [selectedIds, setSelectedIds] = useState([]); 
-  const [loading, setLoading] = useState(false); 
+
 
   // Function to handle read checkbox toggle
   const handleCheckboxToggle = (id) => {
@@ -40,6 +41,8 @@ const Messages = () => {
     );
   };
 
+
+
   const handleSubmit = async () => {
     setLoading(true);
 
@@ -47,7 +50,7 @@ const Messages = () => {
       // Make the API call to update the read status
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
 
-      getMessageInfo(); // Re-fetch the message data after updating read status
+       getMessageInfo(); // Re-fetch the message data after updating read status
     } catch (error) {
       console.error("Failed to update messages:", error);
     } finally {
@@ -95,8 +98,8 @@ const Messages = () => {
       width: 100,
       renderCell: (params) => (
         <Checkbox
-          checked={selectedIds.includes(params.row.id)} 
-          onChange={() => handleCheckboxToggle(params.row.id)} 
+          checked={selectedIds.includes(params.row.id)}
+          onChange={() => handleCheckboxToggle(params.row.id)}
           color="primary"
         />
       ),
@@ -106,7 +109,15 @@ const Messages = () => {
   ];
 
   return (
-    <Paper sx={{ m: "3rem 0", p: "1rem", height: 400, width: "100%" }}>
+    <Paper
+      sx={{
+        m: "3rem 0",
+        p: "1rem",
+        height: 400,
+        width: "100%",
+        position: "relative",
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
@@ -114,22 +125,35 @@ const Messages = () => {
         getRowHeight={() => "auto"}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
-        getRowClassName={(params) => (params.row.isRead ? "row-read" : "row-unread")}
-        sx={{ border: 0, columnCount: { sm: 2 },  '& .row-read': {
-          backgroundColor: 'green',
-          color: 'white',
-        },
-        '& .row-unread': {
-          backgroundColor: 'red',
-          color: 'white',
-        }, '&:hover': {backgroundColor:"#1976D2"}}}
+        getRowClassName={(params) =>
+          params.row.isRead ? "row-read" : "row-unread"
+        }
+        sx={{
+          border: 0,
+          columnCount: { sm: 2 },
+          "& .row-read": {
+            backgroundColor: "rgba(136, 194, 115, 0.5)",
+            color: "black",
+          },
+          "& .row-unread": {
+            backgroundColor: "rgba(199, 37, 62, 0.5)",
+            color: "black",
+          },
+          // '&:hover': {backgroundColor:"#1976D2"}
+        }}
         autoHeight
       />
       <MyButton
         color="primary"
         onClick={handleSubmit}
-        style={{ margin: "2.5rem auto" }}
-        disabled={loading || selectedIds.length === 0} 
+        style={{
+          margin: "2.5rem auto",
+          position: "absolute",
+          left: "50%",
+          bottom: "-30px",
+          transform: "translateX(-50%)",
+        }}
+        disabled={loading || selectedIds.length === 0}
       >
         {loading ? <CircularProgress size={24} /> : "Submit Read Status"}
       </MyButton>

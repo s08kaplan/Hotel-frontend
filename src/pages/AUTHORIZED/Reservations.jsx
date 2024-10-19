@@ -33,8 +33,8 @@ const Reservations = () => {
       ),
     },
     { field: 'bedType', headerName: 'Type', width: 90 },
-    { field: 'arrival_date', headerName: 'Arrival', width: 90 },
-    { field: 'departure_date', headerName: 'Departure', width: 90 },
+    { field: 'arrival_date', headerName: 'Arrival', width: 110 },
+    { field: 'departure_date', headerName: 'Departure', width: 110 },
     {
       field: 'totalPrice',
       headerName: 'Price',
@@ -71,8 +71,18 @@ const Reservations = () => {
         <div>ID: {row.id}</div>
         <div>{row.username}</div>
         <div>(type: {row.bedType}) </div>
-        <div>(Arrival: {row.arrival_date})</div>
-        <div>(Departure: {row.departure_date})</div>
+        <div>
+        (Arrival:
+        {row.arrival_date
+          ? new Date(row.arrival_date).toLocaleDateString()
+          : "N/A"})
+      </div>
+      <div>
+        (Departure:
+        {row.departure_date
+          ? new Date(row.departure_date).toLocaleDateString()
+          : "N/A"})
+      </div>
         <div>(price: {row.totalPrice})</div>
       </div>
     )}

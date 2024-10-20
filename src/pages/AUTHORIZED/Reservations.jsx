@@ -1,8 +1,5 @@
 import React from 'react'
-import { Box } from '@mui/material';
 import { useSelector } from 'react-redux'
-import { DataGrid } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
 import AuthorizedTable from './AuthorizedTable';
 
 

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Checkbox, CircularProgress } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  CircularProgress,
+  useMediaQuery,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Box,
+} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import useMessages from "../../custom-hooks/useMessages";
 import { useSelector } from "react-redux";
@@ -12,12 +22,15 @@ const paginationModel = { page: 0, pageSize: 5 };
 const Messages = () => {
   const { getMessageInfo } = useMessages();
   const { message } = useSelector((state) => state.message);
-  // const { messages } = useSelector((state) => state.authorized);
   const { axiosWithToken } = useAxios();
   const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
+  const [selected, setSelected] = useState("");
 
-  // console.log("messages from authorized slice: ", messages);
+  const handleSelectChange = (e) => {
+    setSelected(e.target.value);
+  };
 
   useEffect(() => {
     getMessageInfo();
@@ -31,16 +44,6 @@ const Messages = () => {
     message: msg.content,
     isRead: msg.isRead,
   })) || [{ username: "", message: "There is no message to read" }];
-  // const rows = messages?.map((msg) => ({
-  //   id: msg._id,
-  //   firstName: msg.userId?.firstName,
-  //   lastName: msg.userId?.lastName,
-  //   username: msg.userId?.username,
-  //   message: msg.content,
-  //   isRead: msg.isRead,
-  // })) || [{ username: "", message: "There is no message to read" }];
-
-
 
   // Function to handle read checkbox toggle
   const handleCheckboxToggle = (id) => {
@@ -52,8 +55,6 @@ const Messages = () => {
     );
   };
 
- 
-
   const handleSubmit = async () => {
     setLoading(true);
 
@@ -61,7 +62,7 @@ const Messages = () => {
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
 
       await getMessageInfo(); // Re-fetch the message data after updating read status
-      setSelectedIds([])
+      setSelectedIds([]);
     } catch (error) {
       console.error("Failed to update messages:", error);
     } finally {
@@ -112,6 +113,12 @@ const Messages = () => {
           checked={selectedIds.includes(params.row.id)}
           onChange={() => handleCheckboxToggle(params.row.id)}
           color="primary"
+          sx={{
+            color: params.row.isRead ? "green" : "red", // Custom color based on row data
+            "&.Mui-checked": {
+              color: params.row.isRead ? "green" : "red", // Custom checked color
+            },
+          }}
         />
       ),
       headerAlign: "center",
@@ -120,55 +127,90 @@ const Messages = () => {
   ];
 
   return (
-    <Paper
-      sx={{
-        m: "3rem 0",
-        p: "1rem",
-        height: 400,
-        width: "100%",
-        position: "relative",
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        disableSelectionOnClick
-        getRowHeight={() => "auto"}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10]}
-        getRowClassName={(params) =>
-          params.row.isRead ? "row-read" : "row-unread"
-        }
-        sx={{
-          border: 0,
-          columnCount: { sm: 2 },
-          "& .row-read": {
-            backgroundColor: "rgba(136, 194, 115, 0.5)",
-            color: "black",
-          },
-          "& .row-unread": {
-            backgroundColor: "rgba(199, 37, 62, 0.5)",
-            color: "black",
-          },
-          // '&:hover': {backgroundColor:"#1976D2"}
-        }}
-        autoHeight
-      />
-      <MyButton
-        color="primary"
-        onClick={handleSubmit}
-        style={{
-          margin: "2.5rem auto",
-          position: "absolute",
-          left: "50%",
-          bottom: "-30px",
-          transform: "translateX(-50%)",
-        }}
-        disabled={loading || selectedIds.length === 0}
-      >
-        {loading ? <CircularProgress size={24} /> : "Submit Read Status"}
-      </MyButton>
-    </Paper>
+    <Box sx={{ backgroundColor:`${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}` }}>
+      {isSmallScreen ? (
+        <FormControl fullWidth>
+          <InputLabel>Messages</InputLabel>
+          <Select
+            value={selected}
+            onChange={handleSelectChange}
+            label="Messages"
+            sx={{ width: "10rem" }}
+          >
+            {rows.map((row) => (
+              <MenuItem key={row.id} value={row.id}>
+                {
+                  <div>
+                    <div>ID: {row.id}</div>
+                    <div>{row.username}</div>
+                    <div
+                      style={{
+                        whiteSpace: "normal",
+                        wordBreak: "break-word",
+                        textAlign: "left",
+                      }}
+                    >
+                      {row.message}
+                    </div>
+                    <div>{row.isRead}</div>
+                  </div>
+                }
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ) : (
+        <Paper
+          sx={{
+            m: "3rem 0",
+            p: "1rem",
+            height: 400,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            disableSelectionOnClick
+            getRowHeight={() => "auto"}
+            initialState={{ pagination: { paginationModel } }}
+            pageSizeOptions={[5, 10]}
+            getRowClassName={(params) =>
+              params.row.isRead ? "row-read" : "row-unread"
+            }
+            sx={{
+              border: 0,
+              columnCount: { sm: 2 },
+              "& .row-read": {
+                backgroundColor: "rgba(136, 194, 115, 0.5)",
+                color: "black",
+              },
+              "& .row-unread": {
+                backgroundColor: "rgba(199, 37, 62, 0.5)",
+                color: "black",
+              },
+              // '&:hover': {backgroundColor:"#1976D2"}
+            }}
+            autoHeight
+          />
+          <MyButton
+            color="primary"
+            onClick={handleSubmit}
+            style={{
+              margin: "2.5rem auto",
+              position: "absolute",
+              left: "50%",
+              bottom: "-30px",
+              transform: "translateX(-50%)",
+            }}
+            disabled={loading || selectedIds.length === 0}
+          >
+            {loading ? <CircularProgress size={24} /> : "Submit Read Status"}
+          </MyButton>
+        </Paper>
+      )}
+    </Box>
   );
 };
 

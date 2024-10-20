@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import flower from "../../assets/images/flower.jpg";
 
 const AuthorizedLayout = ({ children }) => {
+ 
     const layoutStyle = {
         background: `url(${flower})`,
         backgroundSize: "cover",

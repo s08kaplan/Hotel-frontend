@@ -43,14 +43,15 @@ const Dashboard = () => {
         message: false,
         reservation: true,
       }));
-    }else {
-      setShow((prev) => ({
-        ...prev,
-        client: false,
-        message: false,
-        reservation: false,
-      }));
     }
+    // else {
+    //   setShow((prev) => ({
+    //     ...prev,
+    //     client: false,
+    //     message: false,
+    //     reservation: false,
+    //   }));
+    // }
   };
 
   return (

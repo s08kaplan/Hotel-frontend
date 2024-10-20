@@ -51,13 +51,14 @@ const Reservations = () => {
     id:reservation._id,
     image: reservation.roomId?.image[0],
     bedType: reservation.roomId?.bedType,
-    arrival_date : reservation.arrival_date,
-    departure_date : reservation.departure_date,
+    arrival_date :new Date(reservation.arrival_date).toLocaleDateString() ,
+    departure_date :new Date(reservation.departure_date).toLocaleDateString() ,
     totalPrice: reservation.totalPrice,
     username: reservation.userId?.username
   }))
 
   console.log(reservations);
+  console.log(new Date(reservations[0].arrival_date).toLocaleDateString());
   return (
     <AuthorizedTable
     columns={columns}
@@ -70,15 +71,11 @@ const Reservations = () => {
         <div>(type: {row.bedType}) </div>
         <div>
         (Arrival:
-        {row.arrival_date
-          ? new Date(row.arrival_date).toLocaleDateString()
-          : "N/A"})
+        {row.arrival_date})
       </div>
       <div>
         (Departure:
-        {row.departure_date
-          ? new Date(row.departure_date).toLocaleDateString()
-          : "N/A"})
+        {row.departure_date})
       </div>
         <div>(price: {row.totalPrice})</div>
       </div>

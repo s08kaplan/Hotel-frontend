@@ -29,6 +29,7 @@ const Messages = () => {
   const [selected, setSelected] = useState("");
 
   const handleSelectChange = (e) => {
+    console.log(e.target.value);
     setSelected(e.target.value);
   };
 
@@ -67,6 +68,20 @@ const Messages = () => {
       console.error("Failed to update messages:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const smallScreenSubmit = async (id) => {
+    console.log("triggered");
+   
+    setSelectedIds(id
+    );
+
+    try {
+      await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
+      await getMessageInfo();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -127,7 +142,16 @@ const Messages = () => {
   ];
 
   return (
-    <Box sx={{ backgroundColor:`${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}` }}>
+    <Box
+      sx={{
+        // backgroundColor: `${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`,
+        m: "3rem 0",
+        p: "1rem",
+        height: 400,
+        width: `${isSmallScreen ? "100%" : "calc(100vw - 220px)"}`,
+        overflowX: 'auto'
+      }}
+    >
       {isSmallScreen ? (
         <FormControl fullWidth>
           <InputLabel>Messages</InputLabel>
@@ -135,27 +159,53 @@ const Messages = () => {
             value={selected}
             onChange={handleSelectChange}
             label="Messages"
-            sx={{ width: "10rem" }}
+            sx={{ width: "15rem" }}
           >
             {rows.map((row) => (
-              <MenuItem key={row.id} value={row.id}>
-                {
-                  <div>
-                    <div>ID: {row.id}</div>
-                    <div>{row.username}</div>
-                    <div
-                      style={{
-                        whiteSpace: "normal",
-                        wordBreak: "break-word",
-                        textAlign: "left",
-                      }}
-                    >
-                      {row.message}
+              <Box key={row.id}>
+                <MenuItem value={row.id}>
+                  {
+                    <div style={{padding:".5rem", borderRadius:".8rem",backgroundColor: `${row.isRead ? "rgba(136, 194, 115, 0.5)" : "rgba(199, 37, 62, 0.5)"}`}}>
+                      <div>ID: {row.id}</div>
+                      <div>
+                        Username:{" "}
+                        <span
+                          style={{ textDecoration: "underline", color: "blue" }}
+                        >
+                          {row.username}
+                        </span>{" "}
+                      </div>
+                      <div
+                        style={{
+                          whiteSpace: "normal",
+                          wordBreak: "break-word",
+                          textAlign: "left"
+                        }}
+                      >
+                        {row.message}
+                      </div>
+                      <div style={{ display: "flex", gap: "1rem" }}>
+                        {row.isRead ? (
+                          <MyButton
+                            onClick={() => smallScreenSubmit(row.id)}
+                            style={{ backgroundColor: "red" }}
+                          >
+                            unRead
+                          </MyButton>
+                        ) : (
+                          <MyButton
+                            onClick={() => smallScreenSubmit(row.id)}
+                            style={{ backgroundColor: "green" }}
+                          >
+                            isRead
+                          </MyButton>
+                        )}
+                      </div>
                     </div>
-                    <div>{row.isRead}</div>
-                  </div>
-                }
-              </MenuItem>
+                  }
+                </MenuItem>
+                <hr style={{ border: "2px solid gray" }} />
+              </Box>
             ))}
           </Select>
         </FormControl>

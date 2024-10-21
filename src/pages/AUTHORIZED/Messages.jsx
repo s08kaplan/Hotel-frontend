@@ -145,7 +145,7 @@ const Messages = () => {
       sx={{
         backgroundColor: `${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`,
         // m: "3rem 0",
-        // p: "1rem",
+        p: `${isSmallScreen && "1rem"}`,
         height: 400,
         width: `${isSmallScreen ? "100%" : "calc(100vw - 220px)"}`,
         overflowX: 'auto'

@@ -74,8 +74,7 @@ const Messages = () => {
   const smallScreenSubmit = async (id) => {
     console.log("triggered");
    
-    setSelectedIds(id
-    );
+    setSelectedIds(id);
 
     try {
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
@@ -144,9 +143,9 @@ const Messages = () => {
   return (
     <Box
       sx={{
-        // backgroundColor: `${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`,
-        m: "3rem 0",
-        p: "1rem",
+        backgroundColor: `${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`,
+        // m: "3rem 0",
+        // p: "1rem",
         height: 400,
         width: `${isSmallScreen ? "100%" : "calc(100vw - 220px)"}`,
         overflowX: 'auto'
@@ -212,8 +211,8 @@ const Messages = () => {
       ) : (
         <Paper
           sx={{
-            m: "3rem 0",
-            p: "1rem",
+            // m: "3rem 0",
+            // p: "1rem",
             height: 400,
             width: "100%",
             position: "relative",

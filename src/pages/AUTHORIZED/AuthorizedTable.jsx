@@ -11,7 +11,7 @@ const AuthorizedTable = ({columns, rows, dropdownLabel = "Item", renderDropdownI
       };
 
   return (
-     <Box sx={{backgroundColor:`${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`}}>
+     <Box sx={{width:"100%", backgroundColor:`${isSmallScreen ? "" : "rgba(255, 255, 255, 0.5)"}`}}>
       {isSmallScreen ? (
         <FormControl fullWidth>
           <InputLabel>{dropdownLabel}</InputLabel>
@@ -24,7 +24,7 @@ const AuthorizedTable = ({columns, rows, dropdownLabel = "Item", renderDropdownI
           </Select>
         </FormControl>
       ) : (
-        <Box sx={{ height: tableHeight, width: '100%', overflowX: 'auto' }}>
+        <Box sx={{ height: tableHeight, width: 'calc(100vw - 250px)', overflowX: 'auto' }}>
           <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} autoHeight />
         </Box>
       )}

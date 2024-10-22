@@ -51,11 +51,11 @@ const handleForm = () => {
   console.log(user);
 
   return (
-    <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"1rem"}}>
+    <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"1rem", color: "white"}}>
       {user?.image ? (
         <img src={user?.image} alt={user?.username} width={350} style={{borderRadius:"20%"}} className="profile-img" />
       ) : (
-        <AccountCircleIcon sx={{ fontSize: "10rem", color: "#1976D2" }} />
+        <AccountCircleIcon sx={{ fontSize: "10rem", color: "white" }} />
       )}
       <Typography>{user?.username}</Typography>
       <Typography>{user?.biography}</Typography>

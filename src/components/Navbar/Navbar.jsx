@@ -22,6 +22,7 @@ import MenuItem from "@mui/material/MenuItem";
 import useAuthCalls from "../../custom-hooks/useAuthCalls";
 import MessagesFromUsers from "../MESSAGES-USERS/MessagesFromUsers";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import SearchBar from "../SEARCH-BAR/Searchbar";
 
 // ! styled elements for search part
 const Search = styled("div")(({ theme }) => ({
@@ -197,7 +198,7 @@ export default function Navbar() {
               style={{ padding: "10px" }}
             />
           </Typography>
-          <Search sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}>
+          {/* <Search sx={{ display: { xs: "none", sm: "flex", md: "flex" } }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -205,7 +206,8 @@ export default function Navbar() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
+          <SearchBar/>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {navbarNavigation.map(
               (item) =>

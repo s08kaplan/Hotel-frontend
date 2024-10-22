@@ -15,7 +15,7 @@ const AuthorizedLayout = ({ children }) => {
         width: "100%",
         padding: "1rem",
         "overflowX":"hidden",
-        "overflowY":"auto"
+        // "overflowY":"auto"
     }
   return (
     <Box sx={layoutStyle}>

@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import AppRouter from "./router/AppRouter";
-import Navbar from "./components/NAVBAR/Navbar";
+import Navbar from "./components/NAV-BAR/Navbar";
 import Footer from "./components/FOOTER/Footer";
 import Box from "@mui/material/Box";
 import backgroundImg from "./assets/images/backgroundImg-2.jpg";

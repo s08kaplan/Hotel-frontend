@@ -3,18 +3,18 @@ import { Routes, Route } from "react-router-dom";
 import SuspenseWrapper from "../components/SUSPENSE-WRAPPER/SuspenseWrapper";
 import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/Home";
-import Unauthorized from "../pages/UNAUTHORIZED/Unauthorized";
+import Unauthorized from "../pages/Unauthorized";
 import AuthorizedLayout from "../pages/AUTHORIZED/AuthorizedLayout";
 
-const Login = lazy(() => import("../pages/LOGIN/Login"));
-const Register = lazy(() => import("../pages/REGISTER/Register"));
-const Payment = lazy(() => import("../pages/PAYMENT/Payment"));
+const Login = lazy(() => import("../pages/Login"));
+const Register = lazy(() => import("../pages/Register"));
+const Payment = lazy(() => import("../pages/Payment"));
 const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
-const Rooms = lazy(() => import("../pages/ROOMS/Rooms"));
+const Rooms = lazy(() => import("../pages/Rooms"));
 const RoomDetail = lazy(() => import("../pages/ROOM-DETAIL/RoomDetail"));
 const Upload = lazy(() => import("../pages/Upload"));
-const Profile = lazy(() => import("../pages/PROFILE/Profile"));
+const Profile = lazy(() => import("../pages/Profile"));
 const Dashboard = lazy(() => import("../pages/AUTHORIZED/Dashboard"));
 const NotFound = lazy(() => import("../pages/404/NotFound"));
 

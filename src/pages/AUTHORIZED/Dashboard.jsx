@@ -10,9 +10,9 @@ import Reservations from "./Reservations";
 const Dashboard = () => {
   const { getAuthorizedData } = useAuthorized();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const from = location?.state?.from || null;
-  console.log(from);
+  // console.log(from);
   const [show, setShow] = useState({
     client: false,
     message: false,
@@ -25,7 +25,7 @@ const Dashboard = () => {
   }, []);
 
   const handleShow = (e) => {
-    console.log(e.target.textContent);
+    // console.log(e.target.textContent);
     const { textContent } = e.target;
     if (textContent === "Clients") {
       setShow((prev) => ({
@@ -62,7 +62,7 @@ const Dashboard = () => {
     // }
   };
 
- console.log(show.visible);
+//  console.log(show.visible);
   return (
     <Box
       onClick={handleShow}

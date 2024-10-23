@@ -29,7 +29,7 @@ const Messages = () => {
   const [selected, setSelected] = useState("");
 
   const handleSelectChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setSelected(e.target.value);
   };
 
@@ -72,7 +72,7 @@ const Messages = () => {
   };
 
   const smallScreenSubmit = async (id) => {
-    console.log("triggered");
+    // console.log("triggered");
    
     setSelectedIds(id);
 
@@ -80,7 +80,7 @@ const Messages = () => {
       await axiosWithToken.post("messages/unread", { messageIds: selectedIds });
       await getMessageInfo();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

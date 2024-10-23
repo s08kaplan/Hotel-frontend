@@ -38,13 +38,12 @@ function RoomCard() {
   const navigate = useNavigate();
 
   const location = useLocation()
-  console.log(location);
-  console.log(location?.state?.from);
+  // console.log(location);
 
   const filteredRoomsToShow = rooms?.filter(room => location?.state?.from?.toLowerCase().includes(room.bedType)  ) || []
-  console.log(filteredRoomsToShow);
+  // console.log(filteredRoomsToShow);
 
-  console.log(token);
+  // console.log(token);
 
   const handleNavigate = (id) => {
     navigate(`/room-detail/${id}`);
@@ -54,11 +53,11 @@ function RoomCard() {
     roomId ? getRoomsInfo("roomDetail", roomId) : getRoomsInfo();
   }, [roomId]);
 
-  console.log(rooms);
-  console.log(roomId);
-  console.log(roomDetail);
+  // console.log(rooms);
+  // console.log(roomId);
+  // console.log(roomDetail);
   const mapRooms =useMemo(() => filteredRoomsToShow.length > 0 ? filteredRoomsToShow : rooms, [filteredRoomsToShow,rooms]) 
-  console.log(mapRooms);
+  // console.log(mapRooms);
 
   return (
     <Grid container spacing={4} sx={{ placeContent: "center" }}>

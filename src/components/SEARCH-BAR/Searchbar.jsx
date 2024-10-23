@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Box  from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
-
 
 // ! styled elements for search part
 const Search = styled("div")(({ theme }) => ({
@@ -58,38 +57,33 @@ const Searchbar = () => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-console.log("e.target.value: ",e.target.value);
-   const filtered = roomOptions.filter((option) =>
+    // console.log("e.target.value: ", e.target.value);
+    const filtered = roomOptions.filter((option) =>
       option.toLowerCase().includes(searchTerm.toLowerCase())
     );
     // console.log("filtered in change: ",filtered);
     setFilteredOptions(filtered);
 
     setShowSuggestions(searchTerm.length > 0 && filtered.length > 0);
-
-  
   };
 
   const handleOptionClick = (option) => {
     setShowSuggestions(false);
-  //  console.log(option);
-    
-   const filtered = roomOptions.filter((room) =>
-    room.toLowerCase().includes(option.toLowerCase())
-  );
-    
-  console.log("filtered: ", filtered);
-      navigate("/rooms",{state:{from:filtered[0]}});
-      setTimeout(() => {
-      setSearchTerm("");  
-      }, 500);
-      
-    
+    //  console.log(option);
 
+    const filtered = roomOptions.filter((room) =>
+      room.toLowerCase().includes(option.toLowerCase())
+    );
+
+    // console.log("filtered: ", filtered);
+    navigate("/rooms", { state: { from: filtered[0] } });
+    setTimeout(() => {
+      setSearchTerm("");
+    }, 500);
   };
 
   const handleBlur = () => {
-    setTimeout(() => setShowSuggestions(false), 300); 
+    setTimeout(() => setShowSuggestions(false), 300);
   };
 
   return (
@@ -144,5 +138,3 @@ console.log("e.target.value: ",e.target.value);
 };
 
 export default Searchbar;
-
-

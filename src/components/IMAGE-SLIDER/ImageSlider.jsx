@@ -31,7 +31,7 @@ const ImageSlider = () => {
   const [isHovered, setIsHovered] = useState(false);
   const {rooms} = useSelector(state=>state.room)
   const totalImages = rooms.length;
-  console.log(rooms)
+  // console.log(rooms)
   const {getRoomsInfo} = useRooms()
 
   useEffect(() => {

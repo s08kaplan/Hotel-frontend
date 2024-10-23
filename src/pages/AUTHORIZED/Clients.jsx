@@ -71,7 +71,7 @@ const Clients = () => {
 
   const paginationModel = { page: 0, pageSize: 5 };
 
-  console.log(clients);
+  // console.log(clients);
 
   return (
     <AuthorizedTable

@@ -22,11 +22,11 @@ const PaymentForm = () => {
   const location = useLocation()
   const { from, data:{total} } = location.state || {}
 
-  console.log("from: ", from);
-  console.log("data from location: ", total);
+  // console.log("from: ", from);
+  // console.log("data from location: ", total);
 
-  console.log(user);
-  console.log(booking);
+  // console.log(user);
+  // console.log(booking);
 
   const { getReservationInfo } = useBooking();
 
@@ -65,7 +65,7 @@ const PaymentForm = () => {
       setErrorMessage(error.message);
       setLoading(false);
     } else {
-      console.log("Payment method created:", paymentMethod);
+      // console.log("Payment method created:", paymentMethod);
       setPaymentSucceeded(true);
       setLoading(false);
 
@@ -75,7 +75,7 @@ const PaymentForm = () => {
         currency: "usd",
         status: true,
       });
-      console.log(result.data);
+      // console.log(result.data);
       // Make API call to save payment and finalize the transaction
     }
   };

@@ -66,17 +66,17 @@ const Calendar = forwardRef((props, ref) => {
   const { axiosWithToken } = useAxios();
 
 
-  console.log(roomId);
+  // console.log(roomId);
 
   const getRoomReservationInfo = async () => {
     try {
       const { data } = await axiosWithToken(
         `reservations?filter[roomId]=${roomId}&[status]="payment successful"`
       );
-      console.log(data);
+      // console.log(data);
       setReservedDates(data?.data)
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

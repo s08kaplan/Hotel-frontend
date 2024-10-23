@@ -24,18 +24,18 @@ const Contact = () => {
   } = useForm();
 
   const {axiosWithToken} = useAxios()
-console.log(user)
+// console.log(user)
   const onSubmit = async (data) => {
-    console.log("Form Data: ", data);
+    // console.log("Form Data: ", data);
     const message = await axiosWithToken.post("messages", {content:data.message, userId:user?.id})
-    console.log(message)
+    // console.log(message)
     alert("Your message has been sent successfully!");
     reset();
   };
 
   const silinecek = async()=>{
     const data = await axiosWithToken("messages")
-    console.log(data)
+    // console.log(data)
   }
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -37,6 +37,13 @@ function RoomCard() {
   const { getRoomsInfo } = useRooms();
   const navigate = useNavigate();
 
+  const location = useLocation()
+  console.log(location);
+  console.log(location?.state?.from);
+
+  const filteredRoomsToShow = rooms?.filter(room => location?.state?.from?.toLowerCase().includes(room.bedType)  ) || []
+  console.log(filteredRoomsToShow);
+
   console.log(token);
 
   const handleNavigate = (id) => {
@@ -47,8 +54,11 @@ function RoomCard() {
     roomId ? getRoomsInfo("roomDetail", roomId) : getRoomsInfo();
   }, [roomId]);
 
+  console.log(rooms);
   console.log(roomId);
   console.log(roomDetail);
+  const mapRooms =useMemo(() => filteredRoomsToShow.length > 0 ? filteredRoomsToShow : rooms, [filteredRoomsToShow,rooms]) 
+  console.log(mapRooms);
 
   return (
     <Grid container spacing={4} sx={{ placeContent: "center" }}>
@@ -126,7 +136,7 @@ function RoomCard() {
           </Box>
         </Box>
       ) : (
-        rooms.map((room) => (
+        mapRooms.map((room) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={room._id}>
             <Card
               sx={{ mt: "1rem", backgroundColor: "rgba(90, 145, 197, 0.7)", color:"#fff" }}

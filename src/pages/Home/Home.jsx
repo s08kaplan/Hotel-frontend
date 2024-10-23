@@ -7,9 +7,10 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (e) => {
-    e.target.textContent == "Book Now"
-      ? navigate("/booking")
-      : navigate("/rooms");
+    // e.target.textContent == "Book Now"
+    //   ? navigate("/booking")
+    //   : navigate("/rooms");
+    navigate( "/rooms")
   };
 
   return (

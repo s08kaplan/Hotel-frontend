@@ -8,19 +8,14 @@ import AuthorizedLayout from "../pages/AUTHORIZED/AuthorizedLayout";
 
 const Login = lazy(() => import("../pages/LOGIN/Login"));
 const Register = lazy(() => import("../pages/REGISTER/Register"));
-const Booking = lazy(() => import("../components/BOOKING/Booking"));
 const Payment = lazy(() => import("../pages/PAYMENT/Payment"));
 const About = lazy(() => import("../pages/ABOUT/About"));
-const AboutDetails = lazy(() => import("../pages/ABOUT-DETAILS/AboutDetails"));
 const Contact = lazy(() => import("../pages/CONTACT/Contact"));
 const Rooms = lazy(() => import("../pages/ROOMS/Rooms"));
 const RoomDetail = lazy(() => import("../pages/ROOM-DETAIL/RoomDetail"));
 const Upload = lazy(() => import("../pages/UPLOAD/Upload"));
 const Profile = lazy(() => import("../pages/PROFILE/Profile"));
-const Messages = lazy(() => import("../pages/AUTHORIZED/Messages"));
 const Dashboard = lazy(() => import("../pages/AUTHORIZED/Dashboard"));
-const Reservations = lazy(() => import("../pages/AUTHORIZED/Reservations"));
-const Clients = lazy(() => import("../pages/AUTHORIZED/Clients"));
 const NotFound = lazy(() => import("../pages/404/NotFound"));
 
 const AppRouter = () => {

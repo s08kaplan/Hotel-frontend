@@ -5,9 +5,9 @@ import { Navigate, NavLink, Outlet } from 'react-router-dom'
 
 const PrivateRouter = ({ allowedRoles = [] }) => {
   const { user,token } = useSelector(state => state.auth);
-  console.log(user);
-console.log(token);
-console.log(allowedRoles);
+//   console.log(user);
+// console.log(token);
+// console.log(allowedRoles);
   // If user is not logged in or not active, redirect to login
   if (!user || !user.isActive || !token) {
     return <Navigate to="/login" replace />;
@@ -23,7 +23,7 @@ console.log(allowedRoles);
 
   // Check if the user has any of the required roles
   const hasRequiredRole = allowedRoles.some(role => userRoles.includes(role));
-console.log(hasRequiredRole);
+// console.log(hasRequiredRole);
   // If roles are required but the user lacks them, redirect to unauthorized
   if (allowedRoles.length > 0 && !hasRequiredRole) {
     return <Navigate to="/unauthorized" replace />;

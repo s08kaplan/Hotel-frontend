@@ -44,7 +44,7 @@ export default function Navbar() {
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
 
-  console.log(user);
+  // console.log(user);
   // console.log(token);
 
   const handleDrawerToggle = () => {

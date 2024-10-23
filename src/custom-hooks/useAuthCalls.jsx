@@ -18,19 +18,19 @@ const useAuthCalls = () => {
             login(userInfo)
         } catch (error) {
             dispatch(fetchFail(error))
-            console.error(error)
+            // console.error(error)
         }
     }
     const login = async (userInfo) => {
         dispatch(fetchStart())
         try {
             const { data } = await axiosPublic.post("auth/login",userInfo)
-            console.log(data);
+            // console.log(data);
             dispatch(loginSuccess(data))
             navigate("/rooms")
         } catch (error) {
             dispatch(fetchFail(error))
-            console.error(error)
+            // console.error(error)
         }
     }
     const logout = async () => {
@@ -46,8 +46,8 @@ const useAuthCalls = () => {
     }
 
     const updateUser = async (userId, userInfo) => {
-        console.log(userId);
-        console.log(userInfo);
+        // console.log(userId);
+        // console.log(userInfo);
         dispatch(fetchStart())
         try {
             const { data } =  await axiosWithToken.put(`users/${userId}`,userInfo)
@@ -55,7 +55,7 @@ const useAuthCalls = () => {
             
         } catch (error) {
             dispatch(fetchFail(error))
-            console.error(error)
+            // console.error(error)
         }
     }
 

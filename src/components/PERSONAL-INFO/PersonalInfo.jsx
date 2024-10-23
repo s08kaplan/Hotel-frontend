@@ -27,16 +27,13 @@ const handleForm = () => {
 }
   const {
     register,
-    control,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful, isDirty },
-    setValue,
-    getValues,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
   } = useForm({ resolver: yupResolver(registerSchema) });
 
   const onSubmit = (data) => {
-    console.log("submit data", data);
+    // console.log("submit data", data);
     updateUser(id, data);
   };
 
@@ -48,7 +45,7 @@ const handleForm = () => {
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"1rem", color: "white"}}>

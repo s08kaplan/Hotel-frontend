@@ -55,8 +55,8 @@ const Reservations = () => {
     username: reservation.userId?.username,
   }));
 
-  console.log(reservations);
-  console.log(new Date(reservations[0].arrival_date).toLocaleDateString());
+  // console.log(reservations);
+  // console.log(new Date(reservations[0].arrival_date).toLocaleDateString());
   return (
     <AuthorizedTable
       columns={columns}

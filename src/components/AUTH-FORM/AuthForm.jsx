@@ -43,7 +43,7 @@ const AuthForm = ({ formType, schema }) => {
   } = useForm({ resolver: yupResolver(resolvedSchema) });
 
   const onSubmit = (data) => {
-    console.log("submit data", data);
+    // console.log("submit data", data);
     formType == "register"
       ? dispatch(registerUser(data))
       : dispatch(login(data));
@@ -54,7 +54,7 @@ const AuthForm = ({ formType, schema }) => {
   }, [isSubmitSuccessful, reset]);
 
   const handleNavigate = () => {
-    console.log("handle navigate active");
+    // console.log("handle navigate active");
     formType === "login" ? navigate("/register") : navigate("/login");
   };
 

@@ -50,7 +50,7 @@ const containerStyles = {
 
 const Footer = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
+  // console.log(pathname);
   return (
     <Box
       sx={{

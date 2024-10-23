@@ -44,7 +44,6 @@ const AppRouter = () => {
           <Route path="upload" element={<Upload />} />
         </Route>
         <Route path="about" element={<About />} />
-        <Route path="about-details/:id" element={<AboutDetails />} />
         <Route path="contact" element={<Contact />} />
         <Route path="rooms" element={<Rooms />} />
         <Route path="room-detail/:roomId" element={<RoomDetail />} />

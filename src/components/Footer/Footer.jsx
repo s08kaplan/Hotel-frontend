@@ -73,7 +73,7 @@ const Footer = () => {
               },
             }}
           >
-            © 2024 PyScript Hotels Group
+            © 2024 PyScript Hotel
           </Typography>
           <Box sx={containerStyles}>
             <WhatsAppIcon onClick={() =>  window.open("https://web.whatsapp.com/", "_blank", "noopener,noreferrer")}  className="icon icon-whatsapp" sx={iconStyles} />

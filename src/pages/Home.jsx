@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import ImageSlider from "../../components/IMAGE-SLIDER/ImageSlider";
+import ImageSlider from "../components/IMAGE-SLIDER/ImageSlider";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 

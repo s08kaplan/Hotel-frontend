@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import useAxios from "../../custom-hooks/useAxios"
+import useAxios from "../custom-hooks/useAxios"
 import {
   Box,
   Grid,

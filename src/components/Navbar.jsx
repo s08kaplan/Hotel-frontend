@@ -16,10 +16,10 @@ import logo1 from "../../assets/images/logo-1.png";
 import ListItemButton from "@mui/material/ListItemButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import useAuthCalls from "../../custom-hooks/useAuthCalls";
-import MessagesFromUsers from "../MESSAGES-USERS/MessagesFromUsers";
+import useAuthCalls from "../custom-hooks/useAuthCalls";
+import MessagesFromUsers from "./MESSAGES-USERS/MessagesFromUsers";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import SearchBar from "../SEARCH-BAR/Searchbar";
+import SearchBar from "./SEARCH-BAR/Searchbar";
 
 
 

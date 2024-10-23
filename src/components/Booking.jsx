@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import useBooking from "../../custom-hooks/useBooking";
+import useBooking from "../custom-hooks/useBooking";
 import { Box, Stack, Typography } from "@mui/material";
-import Calendar from "../FORM-INPUTS/Calendar";
-import MyButton from "../FORM-INPUTS/MyButton";
-import useRooms from "../../custom-hooks/useRooms";
-import ErrorModal from "../ERROR-MODAL/ErrorModal";
+import Calendar from "./FORM-INPUTS/Calendar";
+import MyButton from "./FORM-INPUTS/MyButton";
+import useRooms from "../custom-hooks/useRooms";
+import ErrorModal from "./ERROR-MODAL/ErrorModal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 

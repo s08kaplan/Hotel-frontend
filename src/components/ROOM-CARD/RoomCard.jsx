@@ -18,7 +18,7 @@ import { Box, Stack } from "@mui/material";
 import MyButton from "../FORM-INPUTS/MyButton";
 import Grid from "@mui/material/Grid2"; // Import Grid from material UI
 import RatingStatus from "../RATING/RatingStatus";
-import Booking from "../BOOKING/Booking";
+import Booking from "../Booking";
 import SocialMediaModal from "../SOCIAL-MEDIA/SocialMediaModal";
 
 const StyledLink = styled(Link)`

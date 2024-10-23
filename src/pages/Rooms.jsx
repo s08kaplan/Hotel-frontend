@@ -1,4 +1,4 @@
-import RoomCard from "../../components/ROOM-CARD/RoomCard";
+import RoomCard from "../components/ROOM-CARD/RoomCard";
 
 const Rooms = () => {
   return <RoomCard />;

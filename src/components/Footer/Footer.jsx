@@ -54,12 +54,13 @@ const Footer = () => {
   return (
     <Box
       sx={{
+        backgroundColor:"rgba(0, 0, 0, 0.6)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         height: "5rem",
         padding: "0 10%",
-        color: "#fff",
+        color: "white",
       }}
     >
       {pathname !== "/authorized" && (
@@ -75,11 +76,11 @@ const Footer = () => {
             © 2024 PyScript Hotels Group
           </Typography>
           <Box sx={containerStyles}>
-            <WhatsAppIcon className="icon icon-whatsapp" sx={iconStyles} />
-            <LinkedInIcon className="icon icon-linkedin" sx={iconStyles} />
-            <GitHubIcon className="icon icon-github" sx={iconStyles} />
-            <EmailIcon className="icon icon-email" sx={iconStyles} />
-            <TelegramIcon className="icon icon-telegram" sx={iconStyles} />
+            <WhatsAppIcon onClick={() =>  window.open("https://web.whatsapp.com/", "_blank", "noopener,noreferrer")}  className="icon icon-whatsapp" sx={iconStyles} />
+            <LinkedInIcon onClick={() =>  window.open("https://www.linkedin.com/", "_blank", "noopener,noreferrer")}  className="icon icon-linkedin" sx={iconStyles} />
+            <TelegramIcon onClick={() =>  window.open("https://web.telegram.org/k/", "_blank", "noopener,noreferrer")}  className="icon icon-telegram" sx={iconStyles} />
+            <EmailIcon onClick={() => window.open("https://mail.google.com", "_blank", "noopener,noreferrer")}  className="icon icon-email" sx={iconStyles} />
+            {/* <GitHubIcon className="icon icon-github" sx={iconStyles} /> */}
           </Box>
         </>
       )}

@@ -33,23 +33,13 @@ const Contact = () => {
     reset();
   };
 
-  const silinecek = async()=>{
-    const data = await axiosWithToken("messages")
-    // console.log(data)
-  }
-
-  useEffect(() => {
-    silinecek()
-  }, [])
-  
-
   return (
-    <Box sx={{ p: 4, maxWidth: "lg", margin: "0 auto" }}>
+    <Box sx={{ p: 4, maxWidth: "lg", margin: "0 auto", color:"white" }}>
       {/* Title Section */}
       <Typography variant="h3" align="center" gutterBottom>
         Get in Touch with Us
       </Typography>
-      <Typography variant="h6" align="center" color="white" sx={{ mb: 4, color:"rgba(1, 10, 90, 0.8)" }}>
+      <Typography variant="h6" align="center" color="white" sx={{ mb: 4,  textShadow:"1px 3px 10px rgba(1, 10, 10, 0.8)" }}>
         We'd love to hear from you. Whether you have questions about your stay, feedback, or
         any other inquiries, feel free to reach out.
       </Typography>
